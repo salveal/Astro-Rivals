@@ -3,17 +3,26 @@ extends KinematicBody2D
 var GRAVITY = 5000
 var MAX_SPEED = 4000
 var JUMP = 2500
+var MAX_POWER = 200
+var MIN_POWER = 0
 
 onready var Planet = get_parent().get_node("Planet")
+onready var power_bar = $PowerBar
+var BULLET = preload("res://scenes/bullet.tscn")
 
 var direction = 0
 var speed = Vector2()
 var velocity = Vector2()
 var grav_point = Vector2()
+var generate_shoot = false
+var rate = 2
+var power = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	grav_point = Planet.global_position
+	power = 0
+	print(grav_point)
 	
 func get_rotation_player(grav_vector):
 	var rotation = Vector2(0,1)
@@ -65,4 +74,24 @@ func _process(delta):
 	if Input.is_action_pressed("add_grav"):
 		GRAVITY += 1000
 	elif Input.is_action_pressed("low_grav"):
-		GRAVITY -= 1000	
+		GRAVITY -= 1000
+	
+	if generate_shoot == true:
+		if generate_shoot and (power > MAX_POWER or power < MIN_POWER):
+			rate = -rate
+			
+		power += rate
+		power_bar.value = power
+		if Input.is_action_just_released("shoot"):
+			var bullet = BULLET.instance()
+			var mouse_position = get_global_mouse_position()
+			bullet.global_position = global_position - (global_position - mouse_position).normalized() * 25
+			bullet.linear_velocity = (mouse_position - global_position).normalized() * power * 2
+			get_parent().add_child(bullet)
+			generate_shoot = false
+			power = 0
+			power_bar.value = power
+	
+	# Generar disparo
+	if Input.is_action_just_pressed("shoot"):
+		generate_shoot = true
