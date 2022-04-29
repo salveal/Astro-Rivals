@@ -8,7 +8,6 @@ func _ready():
 	$RedPlayer.active = false
 
 func _draw():
-	draw_circle($Planet.position, $Planet/CollisionShape2D.shape.radius, Color(1,0.2,0.1,1))
 	draw_circle($Planet.position, $Planet/Gravity/CollisionShape2D.shape.radius, Color(0,1,1,0.1))
 
 func _input(event):
