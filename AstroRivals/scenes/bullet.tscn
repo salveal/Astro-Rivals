@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/misil.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 5 )
+extents = Vector2( 4, 2.5 )
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
@@ -189,14 +189,13 @@ linear_velocity = Vector2( 180, 100 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4, -0.5 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 8, -1 )
+scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 2 )
-position = Vector2( -2.84217e-14, -2.84217e-14 )
-scale = Vector2( 1, 1 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 hframes = 3
 __meta__ = {
