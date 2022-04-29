@@ -11,7 +11,6 @@ var direction = 0
 var speed = Vector2()
 var velocity = Vector2()
 var grav_point = Vector2()
-var bullet
 var generate_shoot = false
 var rate = 2
 var power = 0
@@ -87,7 +86,6 @@ func _physics_process(delta):
 		if speed.y < GRAVITY:
 			speed.y += GRAVITY * delta
 		
-		
 	# Se generan las rotaciones de las velocidades y del personaje
 	velocity = Vector2(speed.x * delta, speed.y * delta)
 	velocity = velocity.rotated(rotation)
@@ -116,7 +114,7 @@ func _process(delta):
 			power += rate
 			power_bar.value = power
 			if Input.is_action_just_released("shoot"):
-				bullet = BULLET.instance()
+				var bullet = BULLET.instance()
 				var mouse_position = get_global_mouse_position()
 				bullet.global_position = global_position - (global_position - mouse_position).normalized() * 25
 				bullet.linear_velocity = (mouse_position - global_position).normalized() * power * 2
