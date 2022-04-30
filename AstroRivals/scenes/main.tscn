@@ -845,8 +845,8 @@ radius = 285.028
 script = ExtResource( 4 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1028.0
+margin_bottom = 599.0
 texture = SubResource( 42 )
 
 [node name="Level1Background" type="Sprite" parent="TextureRect"]
@@ -869,7 +869,7 @@ scale = Vector2( 0.21875, 0.21875 )
 texture = ExtResource( 1 )
 
 [node name="BloqueRigid2" type="RigidBody2D" parent="."]
-position = Vector2( 1021, 509 )
+position = Vector2( 808, 475 )
 linear_velocity = Vector2( -250, -100 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BloqueRigid2"]
@@ -939,7 +939,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 26 )
 
 [node name="RedPlayer" type="KinematicBody2D" parent="."]
-position = Vector2( 292, 147 )
+position = Vector2( 173, 124 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 13 )
 
@@ -987,7 +987,6 @@ position = Vector2( 504, 303 )
 shape = SubResource( 6 )
 
 [node name="Gravity" type="Area2D" parent="Planet"]
-visible = false
 space_override = 3
 gravity_point = true
 gravity_vec = Vector2( 0, 0 )

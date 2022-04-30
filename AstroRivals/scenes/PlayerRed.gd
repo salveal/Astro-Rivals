@@ -11,10 +11,11 @@ var direction = 0
 var speed = Vector2()
 var velocity = Vector2()
 var grav_point = Vector2()
+var bullet
 var generate_shoot = false
 var rate = 2
 var power = 0
-var active = true
+var active = false
 var changeControl = false
 
 # Imports
@@ -51,7 +52,10 @@ func apply_movement(sp, delta):
 		
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		sp.y = -2 * JUMP
+			
+	return sp
 
+func apply_animations():
 	# Animation
 	if is_on_floor():
 		if direction != 0:
@@ -61,13 +65,12 @@ func apply_movement(sp, delta):
 	else:
 		playback.travel("jump")
 
-	if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
-		sprite.flip_h = false
+	if active:
+		if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
+			sprite.flip_h = false
 
-	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-		sprite.flip_h = true
-			
-	return sp
+		if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+			sprite.flip_h = true
 
 # Function called to move the player around the scene
 func _physics_process(delta):
@@ -80,11 +83,9 @@ func _physics_process(delta):
 	# para poder aplicarla o no
 	if is_in_area_gravity() and active:
 		speed = apply_movement(speed, delta)
-
-	else:
-		speed.x = MAX_SPEED * direction
-		if speed.y < GRAVITY:
-			speed.y += GRAVITY * delta
+		
+	apply_animations()
+		
 		
 	# Se generan las rotaciones de las velocidades y del personaje
 	velocity = Vector2(speed.x * delta, speed.y * delta)
@@ -114,7 +115,7 @@ func _process(delta):
 			power += rate
 			power_bar.value = power
 			if Input.is_action_just_released("shoot"):
-				var bullet = BULLET.instance()
+				bullet = BULLET.instance()
 				var mouse_position = get_global_mouse_position()
 				bullet.global_position = global_position - (global_position - mouse_position).normalized() * 25
 				bullet.linear_velocity = (mouse_position - global_position).normalized() * power * 2
