@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Area2D.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 74.4312
+
+[node name="Node2D" type="Node2D"]
+modulate = Color( 0, 0, 0, 1 )
+script = ExtResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 29
+collision_mask = 29
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )

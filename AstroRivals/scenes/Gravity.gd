@@ -14,3 +14,5 @@ func _process(delta):
 		gravity += 100
 	elif Input.is_action_pressed("low_grav"):
 		gravity -= 100
+	
+	#print(get_overlapping_bodies())

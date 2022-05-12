@@ -1,27 +1,34 @@
 extends KinematicBody2D
 
-# Variables
+# Variables personajes
+var HP = 100
+
+# Variables Moviminetos
 var GRAVITY = 5000
 var MAX_SPEED = 4000
 var JUMP = 3000
 var MAX_POWER = 200
 var MIN_POWER = 0
-
 var direction = 0
 var speed = Vector2()
 var velocity = Vector2()
 var grav_point = Vector2()
+
+# Variables armas
 var bullet
 var generate_shoot = false
 var rate = 2
 var power = 0
-var active = true
+
+# Variables Turnos
+var active = false
 var changeControl = false
 
 # Imports
 onready var Planet = get_parent().get_node("Planet")
 onready var power_bar = $PowerBar
 onready var sprite = $Sprite
+onready var hp_label = $HP_label/Label
 onready var animTree = $AnimationTree
 onready var playback = animTree.get("parameters/playback")
 var BULLET = preload("res://scenes/bullet.tscn")
@@ -31,6 +38,7 @@ func _ready():
 	animTree.active = true
 	grav_point = Planet.global_position
 	power = 0
+	hp_label.set_text(str(HP))
 	print(grav_point)
 	
 func get_rotation_player(grav_vector):
@@ -64,7 +72,7 @@ func apply_animations():
 			playback.travel("idle")
 	else:
 		playback.travel("jump")
-	
+
 	if active:
 		if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
 			sprite.flip_h = false
@@ -81,16 +89,10 @@ func _physics_process(delta):
 	
 	# Comprueba si el jugador esta en el area de la gravedad
 	# para poder aplicarla o no
-	if is_in_area_gravity():
+	if is_in_area_gravity() and active:
 		speed = apply_movement(speed, delta)
-
-	else:
-		speed.x = MAX_SPEED * direction
-		if speed.y < GRAVITY:
-			speed.y += GRAVITY * delta
 		
 	apply_animations()
-		
 		
 	# Se generan las rotaciones de las velocidades y del personaje
 	velocity = Vector2(speed.x * delta, speed.y * delta)
@@ -122,7 +124,7 @@ func _process(delta):
 			if Input.is_action_just_released("shoot"):
 				bullet = BULLET.instance()
 				var mouse_position = get_global_mouse_position()
-				bullet.global_position = global_position - (global_position - mouse_position).normalized() * 25
+				bullet.global_position = global_position - (global_position - mouse_position).normalized() * 50
 				bullet.linear_velocity = (mouse_position - global_position).normalized() * power * 2
 				get_parent().add_child(bullet)
 				generate_shoot = false
@@ -136,3 +138,9 @@ func _process(delta):
 
 func getChangeControl():
 	return changeControl
+	
+	
+func take_damage(damage_origin: Node):
+	HP -= damage_origin.damage_value
+	hp_label.set_text(str(HP))
+	

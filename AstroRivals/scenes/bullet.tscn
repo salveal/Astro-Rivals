@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/misil.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 2.5 )
+extents = Vector2( 3.75, 2.5 )
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
@@ -177,19 +177,24 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id=9]
 states/init/node = SubResource( 6 )
-states/init/position = Vector2( 221, 99.5 )
+states/init/position = Vector2( 221, 98.75 )
 states/loop/node = SubResource( 7 )
 states/loop/position = Vector2( 411, 98.75 )
 transitions = [ "init", "loop", SubResource( 8 ) ]
+start_node = "init"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=10]
 
 [node name="Misil" type="RigidBody2D"]
+collision_layer = 15
+collision_mask = 15
+contacts_reported = 1
+contact_monitor = true
 linear_velocity = Vector2( 180, 100 )
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 8, -1 )
+[node name="ColisionMisil" type="CollisionShape2D" parent="."]
+position = Vector2( 7.5, -1 )
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 
@@ -203,6 +208,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "init"
 anims/RESET = SubResource( 3 )
 anims/init = SubResource( 4 )
 anims/loop = SubResource( 5 )
@@ -212,6 +218,6 @@ tree_root = SubResource( 9 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 10 )
 
-[node name="Line2D" type="Line2D" parent="."]
-visible = false
-points = PoolVector2Array( 0, 0, -13, -2, -19, -2, -25, -2, -28, 0, -34, 4, -40, 9, -45, 14 )
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

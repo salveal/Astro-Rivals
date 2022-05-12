@@ -1,6 +1,5 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=50 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Gravity.gd" type="Script" id=3]
 [ext_resource path="res://scenes/main.gd" type="Script" id=4]
@@ -12,17 +11,10 @@
 [ext_resource path="res://assets/soldiers/red/Astronaut_Idle_red.png" type="Texture" id=10]
 [ext_resource path="res://assets/soldiers/red/Astronaut_Jump_red.png" type="Texture" id=11]
 [ext_resource path="res://assets/soldiers/red/Astronaut_Run_red.png" type="Texture" id=12]
-[ext_resource path="res://scenes/PlayerRed.gd" type="Script" id=13]
 [ext_resource path="res://assets/levels/level1_planet.png" type="Texture" id=14]
 [ext_resource path="res://assets/levels/level1_background.png" type="Texture" id=15]
 
 [sub_resource type="ImageTexture" id=42]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 15.75, 15 )
-
-[sub_resource type="CanvasItemMaterial" id=3]
-blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 8.25, 8.75 )
@@ -841,7 +833,7 @@ radius = 119.218
 [sub_resource type="CircleShape2D" id=4]
 radius = 285.028
 
-[node name="mainScene" type="Node2D"]
+[node name="Level1" type="Node2D"]
 position = Vector2( 8, 0 )
 script = ExtResource( 4 )
 
@@ -851,53 +843,15 @@ margin_bottom = 599.0
 texture = SubResource( 42 )
 
 [node name="Level1Background" type="Sprite" parent="TextureRect"]
-position = Vector2( 514, 299.5 )
-scale = Vector2( 1.285, 0.998333 )
+position = Vector2( 503, 301 )
+scale = Vector2( 1.4525, 1.09083 )
 texture = ExtResource( 15 )
-
-[node name="BloqueRigid" type="RigidBody2D" parent="."]
-position = Vector2( 96, 268 )
-linear_velocity = Vector2( 180, 100 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BloqueRigid"]
-scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="BloqueRigid"]
-material = SubResource( 3 )
-position = Vector2( -1.90735e-06, 3.8147e-06 )
-scale = Vector2( 0.21875, 0.21875 )
-texture = ExtResource( 1 )
-
-[node name="BloqueRigid2" type="RigidBody2D" parent="."]
-position = Vector2( 808, 475 )
-linear_velocity = Vector2( -250, -100 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BloqueRigid2"]
-scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="BloqueRigid2"]
-material = SubResource( 3 )
-position = Vector2( -0.500042, 7.62939e-06 )
-scale = Vector2( 0.234376, 0.25 )
-texture = ExtResource( 1 )
-
-[node name="BloqueRigid3" type="RigidBody2D" parent="."]
-position = Vector2( 771, 71 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BloqueRigid3"]
-scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="BloqueRigid3"]
-material = SubResource( 3 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 1 )
 
 [node name="BluePlayer" type="KinematicBody2D" parent="."]
 position = Vector2( 449, 509 )
 scale = Vector2( 2, 2 )
+collision_layer = 13
+collision_mask = 15
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="BluePlayer"]
@@ -939,10 +893,24 @@ tree_root = SubResource( 25 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 26 )
 
+[node name="HP_label" type="ColorRect" parent="BluePlayer"]
+margin_left = -5.0
+margin_top = -16.0
+margin_right = 3.0
+margin_bottom = -10.0
+color = Color( 0.0196078, 0.0156863, 0.129412, 1 )
+
+[node name="Label" type="Label" parent="BluePlayer/HP_label"]
+margin_right = 16.0
+margin_bottom = 14.0
+rect_scale = Vector2( 0.5, 0.5 )
+
 [node name="RedPlayer" type="KinematicBody2D" parent="."]
 position = Vector2( 173, 124 )
 scale = Vector2( 2, 2 )
-script = ExtResource( 13 )
+collision_layer = 13
+collision_mask = 15
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="RedPlayer"]
 scale = Vector2( 1.03646, 0.947915 )
@@ -954,10 +922,10 @@ z_index = 7
 shape = SubResource( 7 )
 
 [node name="PowerBar" type="ProgressBar" parent="RedPlayer"]
-margin_left = -12.5
-margin_top = -19.0
-margin_right = 91.5
-margin_bottom = 3.0
+margin_left = -8.0
+margin_top = -24.0
+margin_right = 61.0
+margin_bottom = -2.0
 rect_scale = Vector2( 0.25, 0.25 )
 custom_styles/fg = SubResource( 8 )
 custom_styles/bg = SubResource( 9 )
@@ -981,13 +949,33 @@ tree_root = SubResource( 25 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 41 )
 
+[node name="HP_label" type="ColorRect" parent="RedPlayer"]
+margin_left = -5.0
+margin_top = -16.0
+margin_right = 3.0
+margin_bottom = -10.0
+color = Color( 0.129412, 0.0156863, 0.0156863, 1 )
+
+[node name="Label" type="Label" parent="RedPlayer/HP_label"]
+margin_right = 16.0
+margin_bottom = 14.0
+rect_scale = Vector2( 0.5, 0.5 )
+
 [node name="Planet" type="StaticBody2D" parent="."]
 position = Vector2( 504, 303 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
 shape = SubResource( 6 )
 
+[node name="Sprite" type="Sprite" parent="Planet"]
+position = Vector2( -1.49997, -0.999983 )
+scale = Vector2( 2.39, 2.38 )
+texture = ExtResource( 14 )
+
 [node name="Gravity" type="Area2D" parent="Planet"]
+visible = false
+collision_layer = 10
+collision_mask = 2
 space_override = 3
 gravity_point = true
 gravity_vec = Vector2( 0, 0 )
@@ -995,10 +983,4 @@ gravity = 200.0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planet/Gravity"]
-visible = false
 shape = SubResource( 4 )
-
-[node name="Sprite" type="Sprite" parent="Planet"]
-position = Vector2( -1.49997, -0.999983 )
-scale = Vector2( 2.39, 2.38 )
-texture = ExtResource( 14 )
