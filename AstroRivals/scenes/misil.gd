@@ -3,11 +3,10 @@ extends RigidBody2D
 # Variables
 var grav_point = Vector2()
 var b_rotation = 0
-var fallen_rotation = 0;
 onready var Planet = get_parent().get_node("Planet")
 onready var sprite = $Sprite
 onready var animTree = $AnimationTree
-onready var timer = $Timer
+onready var timer_damage = $Timer_damage
 onready var playback = animTree.get("parameters/playback")
 var EXPLOSION = preload("res://scenes/explosion.tscn")
 var tick = 0
@@ -37,10 +36,12 @@ func check_colision():
 	var bodies = get_colliding_bodies()
 	if len(bodies) > 0 and tick == 0:
 		explosion = EXPLOSION.instance()
-		add_child(explosion)
-		timer.start()
+		explosion.init(global_position, grav_point)
+		get_parent().add_child(explosion)
+		timer_damage.start()
+		visible = not visible
 		tick+=1
 		
-	elif tick==1 and timer.is_stopped():
-		explosion.generate_damage()
+	elif tick==1 and timer_damage.is_stopped():
 		queue_free()
+		explosion.generate_damage()

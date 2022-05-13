@@ -62,6 +62,7 @@ func apply_movement(sp, delta):
 		sp.y = -2 * JUMP
 			
 	return sp
+	
 
 func apply_animations():
 	# Animation
@@ -138,7 +139,6 @@ func _process(delta):
 
 func getChangeControl():
 	return changeControl
-	
 	
 func take_damage(damage_origin: Node):
 	HP -= damage_origin.damage_value

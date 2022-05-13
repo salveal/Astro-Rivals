@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/weapons/RPG-round.png" type="Texture" id=1]
 [ext_resource path="res://scenes/misil.gd" type="Script" id=2]
@@ -59,6 +59,9 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+
+[sub_resource type="Animation" id=11]
+resource_name = "explosion"
 
 [sub_resource type="Animation" id=4]
 resource_name = "init"
@@ -210,6 +213,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "init"
 anims/RESET = SubResource( 3 )
+anims/explosion = SubResource( 11 )
 anims/init = SubResource( 4 )
 anims/loop = SubResource( 5 )
 
@@ -218,6 +222,6 @@ tree_root = SubResource( 9 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 10 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer_damage" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true

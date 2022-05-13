@@ -3,14 +3,26 @@ extends Node2D
 # Variables
 var bodies
 var damage_value
+var grav_position = Vector2()
+var impulse = 400
+onready var timer_delete = $Timer_delete
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	timer_delete.start()
 	print("Se creo la explosion")
+	
+func init(explosion_position, planet_position):
+	var gravity_vector = (planet_position - global_position).normalized()
+	var anim_rotation = Vector2(0,1).angle_to(gravity_vector)
+	set_position(explosion_position)
+	set_rotation(anim_rotation)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if timer_delete.is_stopped():
+		print("eliminar explosion")
+		queue_free()
 	
 func generate_damage():
 	print("Generando daño")
