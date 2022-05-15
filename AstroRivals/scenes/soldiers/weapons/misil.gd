@@ -8,7 +8,7 @@ onready var sprite = $Sprite
 onready var animTree = $AnimationTree
 onready var timer_damage = $Timer_damage
 onready var playback = animTree.get("parameters/playback")
-var EXPLOSION = preload("res://scenes/explosion.tscn")
+var EXPLOSION = preload("res://scenes/soldiers/weapons/explosion.tscn")
 var tick = 0
 var explosion
 
@@ -35,6 +35,7 @@ func _process(delta):
 func check_colision():
 	var bodies = get_colliding_bodies()
 	if len(bodies) > 0 and tick == 0:
+		print(bodies)
 		explosion = EXPLOSION.instance()
 		explosion.init(global_position, grav_point)
 		get_parent().add_child(explosion)
