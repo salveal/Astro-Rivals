@@ -31,7 +31,7 @@ onready var sprite = $Sprite
 onready var hp_label = $HP_label/Label
 onready var animTree = $AnimationTree
 onready var playback = animTree.get("parameters/playback")
-var BULLET = preload("res://scenes/bullet.tscn")
+var BULLET = preload("res://scenes/soldiers/weapons/bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,9 +47,9 @@ func get_rotation_player(grav_vector):
 	
 func apply_movement(sp, delta):
 	# Movement
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move_left") and active:
 		direction = -1
-	elif Input.is_action_pressed("move_right"):
+	elif Input.is_action_pressed("move_right") and active:
 		direction = 1
 	else:
 		direction = 0
@@ -58,7 +58,7 @@ func apply_movement(sp, delta):
 	if sp.y < GRAVITY:
 		sp.y += GRAVITY * delta
 		
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	if is_on_floor() and Input.is_action_just_pressed("jump") and active:
 		sp.y = -2 * JUMP
 			
 	return sp
@@ -90,7 +90,7 @@ func _physics_process(delta):
 	
 	# Comprueba si el jugador esta en el area de la gravedad
 	# para poder aplicarla o no
-	if is_in_area_gravity() and active:
+	if is_in_area_gravity():
 		speed = apply_movement(speed, delta)
 		
 	apply_animations()

@@ -1,18 +1,18 @@
 [gd_scene load_steps=50 format=2]
 
-[ext_resource path="res://scenes/Player.gd" type="Script" id=1]
-[ext_resource path="res://scenes/main.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Gravity.gd" type="Script" id=3]
-[ext_resource path="res://assets/soldiers/blue/Astronaut_Jump.png" type="Texture" id=4]
-[ext_resource path="res://assets/soldiers/red/Astronaut_Idle_red.png" type="Texture" id=5]
-[ext_resource path="res://assets/soldiers/red/Astronaut_Death_red.png" type="Texture" id=6]
-[ext_resource path="res://assets/soldiers/blue/Astronaut_Death.png" type="Texture" id=7]
-[ext_resource path="res://assets/soldiers/blue/Astronaut_Run.png" type="Texture" id=8]
-[ext_resource path="res://assets/soldiers/blue/Astronaut_Idle.png" type="Texture" id=9]
-[ext_resource path="res://assets/soldiers/red/Astronaut_Jump_red.png" type="Texture" id=10]
-[ext_resource path="res://assets/soldiers/red/Astronaut_Run_red.png" type="Texture" id=11]
-[ext_resource path="res://assets/levels/level1_planet.png" type="Texture" id=12]
-[ext_resource path="res://assets/levels/level1_background.png" type="Texture" id=13]
+[ext_resource path="res://assets/soldiers/red/Astronaut_Run_red.png" type="Texture" id=1]
+[ext_resource path="res://assets/soldiers/blue/Astronaut_Death.png" type="Texture" id=2]
+[ext_resource path="res://assets/soldiers/blue/Astronaut_Jump.png" type="Texture" id=3]
+[ext_resource path="res://assets/soldiers/red/Astronaut_Death_red.png" type="Texture" id=4]
+[ext_resource path="res://assets/levels/level1_planet.png" type="Texture" id=5]
+[ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=6]
+[ext_resource path="res://assets/levels/level1_background.png" type="Texture" id=7]
+[ext_resource path="res://scenes/levels/demo.gd" type="Script" id=8]
+[ext_resource path="res://assets/soldiers/red/Astronaut_Jump_red.png" type="Texture" id=9]
+[ext_resource path="res://scenes/soldiers/soldierDemo.gd" type="Script" id=10]
+[ext_resource path="res://assets/soldiers/blue/Astronaut_Idle.png" type="Texture" id=11]
+[ext_resource path="res://assets/soldiers/red/Astronaut_Idle_red.png" type="Texture" id=12]
+[ext_resource path="res://assets/soldiers/blue/Astronaut_Run.png" type="Texture" id=13]
 
 [sub_resource type="ImageTexture" id=42]
 
@@ -55,7 +55,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.473286 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 8 ) ]
+"values": [ ExtResource( 13 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:vframes")
@@ -96,7 +96,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 7 ) ]
+"values": [ ExtResource( 2 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -186,7 +186,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 9 ) ]
+"values": [ ExtResource( 11 ) ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -203,7 +203,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ ExtResource( 3 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -255,7 +255,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ ExtResource( 3 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -308,7 +308,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ ExtResource( 3 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -362,7 +362,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 8 ) ]
+"values": [ ExtResource( 13 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -479,7 +479,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.473286 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 8 ) ]
+"values": [ ExtResource( 13 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:vframes")
@@ -520,7 +520,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 6 ) ]
+"values": [ ExtResource( 4 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -610,7 +610,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ ExtResource( 12 ) ]
 }
 
 [sub_resource type="Animation" id=37]
@@ -627,7 +627,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 10 ) ]
+"values": [ ExtResource( 9 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -679,7 +679,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 10 ) ]
+"values": [ ExtResource( 9 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -732,7 +732,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 10 ) ]
+"values": [ ExtResource( 9 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -786,7 +786,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 11 ) ]
+"values": [ ExtResource( 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:hframes")
@@ -833,9 +833,9 @@ radius = 119.218
 [sub_resource type="CircleShape2D" id=4]
 radius = 285.028
 
-[node name="Level1" type="Node2D"]
+[node name="Demo" type="Node2D"]
 position = Vector2( 8, 0 )
-script = ExtResource( 2 )
+script = ExtResource( 8 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 1028.0
@@ -845,19 +845,19 @@ texture = SubResource( 42 )
 [node name="Level1Background" type="Sprite" parent="TextureRect"]
 position = Vector2( 503, 301 )
 scale = Vector2( 1.4525, 1.09083 )
-texture = ExtResource( 13 )
+texture = ExtResource( 7 )
 
 [node name="BluePlayer" type="KinematicBody2D" parent="."]
 position = Vector2( 449, 509 )
 scale = Vector2( 2, 2 )
 collision_layer = 13
 collision_mask = 15
-script = ExtResource( 1 )
+script = ExtResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="BluePlayer"]
 position = Vector2( -7.62939e-06, 0.250004 )
 scale = Vector2( 0.958333, 0.937499 )
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
 hframes = 6
 frame = 5
 
@@ -906,15 +906,15 @@ margin_bottom = 14.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="RedPlayer" type="KinematicBody2D" parent="."]
-position = Vector2( 173, 124 )
+position = Vector2( 320, 173 )
 scale = Vector2( 2, 2 )
 collision_layer = 13
 collision_mask = 15
-script = ExtResource( 1 )
+script = ExtResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="RedPlayer"]
 scale = Vector2( 1.03646, 0.947915 )
-texture = ExtResource( 11 )
+texture = ExtResource( 1 )
 hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RedPlayer"]
@@ -971,7 +971,7 @@ shape = SubResource( 6 )
 [node name="Sprite" type="Sprite" parent="Planet"]
 position = Vector2( -1.49997, -0.999983 )
 scale = Vector2( 2.39, 2.38 )
-texture = ExtResource( 12 )
+texture = ExtResource( 5 )
 
 [node name="Gravity" type="Area2D" parent="Planet"]
 visible = false
@@ -981,7 +981,7 @@ space_override = 3
 gravity_point = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 200.0
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planet/Gravity"]
 shape = SubResource( 4 )
