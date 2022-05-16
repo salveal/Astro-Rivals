@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/efects/explosion-6.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 20.0
+radius = 33.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001

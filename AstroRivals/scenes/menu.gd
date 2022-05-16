@@ -10,10 +10,10 @@ func _ready():
 	exit.connect("pressed", self, "_on_exit_pressed")
 
 func _on_start_pressed():
-	get_tree().change_scene("res://scenes/levels/demo.tscn")
+	get_tree().change_scene("res://scenes/levels/Level1.tscn")
 	
 func _on_credits_pressed():
-	get_tree().change_scene("res://scenes/levels/Level1.tscn")
+	get_tree().change_scene("res://scenes/levels/demo.tscn")
 
 func _on_exit_pressed():
 	get_tree().quit()

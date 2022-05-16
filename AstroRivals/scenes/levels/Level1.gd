@@ -31,6 +31,7 @@ func _input(event):
 			indexBlue = (indexBlue + 1) % queueBlue.get_child_count()
 			actualPlayer = queueBlue.get_child(indexBlue)
 			activeTeam = 0
+			
 		else: # pasar turno a rojo
 			indexRed = (indexRed + 1) % queueRed.get_child_count()
 			actualPlayer = queueRed.get_child(indexRed)

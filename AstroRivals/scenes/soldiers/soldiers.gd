@@ -90,10 +90,11 @@ func _physics_process(delta):
 	
 	# Comprueba si el jugador esta en el area de la gravedad
 	# para poder aplicarla o no
-	if is_in_area_gravity():
-		speed = apply_movement(speed, delta)
-		
-	apply_animations()
+	if not generate_shoot:
+		if is_in_area_gravity():
+			speed = apply_movement(speed, delta)
+			
+		apply_animations()
 		
 	# Se generan las rotaciones de las velocidades y del personaje
 	velocity = Vector2(speed.x * delta, speed.y * delta)
@@ -116,7 +117,7 @@ func _process(delta):
 		elif Input.is_action_pressed("low_grav"):
 			GRAVITY -= 1000
 		
-		if generate_shoot == true:
+		if generate_shoot == true and is_on_floor():
 			if generate_shoot and (power > MAX_POWER or power < MIN_POWER):
 				rate = -rate
 				
@@ -134,7 +135,7 @@ func _process(delta):
 				changeControl = true
 		
 		# Generar disparo
-		if Input.is_action_just_pressed("shoot"):
+		if Input.is_action_just_pressed("shoot") and is_on_floor():
 			generate_shoot = true
 
 func getChangeControl():
@@ -143,4 +144,3 @@ func getChangeControl():
 func take_damage(damage_origin: Node):
 	HP -= damage_origin.damage_value
 	hp_label.set_text(str(HP))
-	
