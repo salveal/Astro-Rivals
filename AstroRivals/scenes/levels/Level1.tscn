@@ -130,3 +130,5 @@ position = Vector2( 600, 100 )
 
 [node name="Red4" parent="queueRed" instance=ExtResource( 7 )]
 position = Vector2( 400, 500 )
+
+[node name="Timer" type="Timer" parent="."]

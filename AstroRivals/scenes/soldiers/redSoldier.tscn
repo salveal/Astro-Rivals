@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/soldiers/soldiers.gd" type="Script" id=1]
 [ext_resource path="res://assets/soldiers/red/Astronaut_Death_red.png" type="Texture" id=2]
@@ -446,6 +446,14 @@ graph_offset = Vector2( 72, -93.3247 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
+[sub_resource type="DynamicFontData" id=46]
+font_path = "res://assets/font/monogram.ttf"
+
+[sub_resource type="DynamicFont" id=47]
+size = 30
+outline_color = Color( 1, 0, 0, 1 )
+font_data = SubResource( 46 )
+
 [node name="RedSoldier" type="KinematicBody2D"]
 collision_layer = 13
 collision_mask = 13
@@ -491,9 +499,10 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 45 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -6.0
+margin_left = -7.0
 margin_top = -31.0
-margin_right = 18.0
-margin_bottom = -17.0
+margin_right = 29.0
+margin_bottom = -7.0
 rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 47 )
 text = "XXX"
