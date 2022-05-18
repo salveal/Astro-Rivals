@@ -67,6 +67,7 @@ shoot={
 2d_physics/layer_2="gravity"
 2d_physics/layer_3="soldiers"
 2d_physics/layer_4="misil"
+2d_physics/layer_5="mapLimits"
 
 [physics]
 

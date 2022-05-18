@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 # Variables personajes
 var HP = 100
+var needToBeDelete = false
 
 # Variables Moviminetos
 var GRAVITY = 5000
@@ -42,30 +43,35 @@ func _ready():
 	print(grav_point)
 	
 func get_rotation_player(grav_vector):
+	# Funcion que obtienen la rotacion del jugador con respecto al planeta que se encuentra
 	var rotation = Vector2(0,1)
 	return rotation.angle_to(grav_vector)
 	
 func apply_movement(sp, delta):
-	# Movement
+	# Movimiento
+	
+	# se revisa si se mueve el jugador
 	if Input.is_action_pressed("move_left") and active:
 		direction = -1
 	elif Input.is_action_pressed("move_right") and active:
 		direction = 1
 	else:
 		direction = 0
-			
+		
+	# Se realizan los calculos de los vectores de posicion para los dos ejes
 	sp.x = MAX_SPEED * direction
 	if sp.y < GRAVITY:
 		sp.y += GRAVITY * delta
-		
+	
+	# Se revisa si se quiere saltar
 	if is_on_floor() and Input.is_action_just_pressed("jump") and active:
 		sp.y = -2 * JUMP
-			
+	
 	return sp
 	
 
 func apply_animations():
-	# Animation
+	# Animacion
 	if is_on_floor():
 		if direction != 0:
 			playback.travel("walk")
@@ -111,36 +117,73 @@ func is_in_area_gravity():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	# se revisa si es turno del jugador
 	if active:
+		
+		# controles de debug para jugar con la gravedad
 		if Input.is_action_pressed("add_grav"):
 			GRAVITY += 1000
 		elif Input.is_action_pressed("low_grav"):
 			GRAVITY -= 1000
 		
+		# Entra si el jugador va a disparar revisando si se cumple las condiciones necesarias
 		if generate_shoot == true and is_on_floor():
+			
+			# condicion para cambiar el valor de rate para que no salga de los rangos establecidos
 			if generate_shoot and (power > MAX_POWER or power < MIN_POWER):
 				rate = -rate
-				
+			
+			# Se suma el rate
 			power += rate
 			power_bar.value = power
+			
+			# Se revisa si se debe disparar
 			if Input.is_action_just_released("shoot"):
+				# Dejamos de mover al soldado
+				active = false
+				
+				# Creamos la instancia de la bala seleccionada, seteamos su posicion y velocidades
+				# y la agregamos al arbol del nivel
 				bullet = BULLET.instance()
+				bullet.initMisil(self)
 				var mouse_position = get_global_mouse_position()
 				bullet.global_position = global_position - (global_position - mouse_position).normalized() * 50
 				bullet.linear_velocity = (mouse_position - global_position).normalized() * power * 2
 				get_parent().get_parent().add_child(bullet)
+				
+				# Se cambian las variables del soldado para poder pasar el turno al siguiente soldado
 				generate_shoot = false
 				power = 0
 				power_bar.value = power
-				changeControl = true
 		
-		# Generar disparo
+		# cambia la variable si el jugador quiere generar un disparo
 		if Input.is_action_just_pressed("shoot") and is_on_floor():
 			generate_shoot = true
 
+#Retorna la variable si debe termino el turno
 func getChangeControl():
 	return changeControl
-	
+
+# Funcion para aplicarle daño al soldado entregandole el daño de origen que recibe
 func take_damage(damage_origin: Node):
 	HP -= damage_origin.damage_value
 	hp_label.set_text(str(HP))
+	if HP <= 0:
+		deleteNode()
+
+# Funcion que sera llamada para indicar que choco el proyectil enviado por el mismo soldado
+# Esta funcion cambiara la variable de changeControl para pasar el tunro
+func colisionShot():
+	changeControl = true
+	
+func deleteNode():
+	# Si es del jugador activo, dejamos que el script del nivel se encargen de eliminar
+	# el personaje
+	if active:
+		needToBeDelete = true
+		
+	# Si no es, entonces podemos eliminarlo normalmente
+	else:
+		# Aqui deberia haber una animacion de muerte con un timer
+		queue_free()

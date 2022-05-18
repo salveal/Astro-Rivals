@@ -189,8 +189,8 @@ start_node = "init"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=10]
 
 [node name="Misil" type="RigidBody2D"]
-collision_layer = 15
-collision_mask = 15
+collision_layer = 29
+collision_mask = 29
 contacts_reported = 1
 contact_monitor = true
 linear_velocity = Vector2( 180, 100 )
