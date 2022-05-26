@@ -87,19 +87,19 @@ collision_mask = 28
 position = Vector2( 0.599991, 294 )
 shape = SubResource( 4 )
 
-[node name="Planet" type="StaticBody2D" parent="."]
+[node name="Planet1" type="StaticBody2D" parent="."]
 position = Vector2( 504, 303 )
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet1"]
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="Planet"]
+[node name="Sprite" type="Sprite" parent="Planet1"]
 position = Vector2( 5.72205e-06, -2.49147e-05 )
 scale = Vector2( 0.82, 0.8 )
 texture = ExtResource( 4 )
 
-[node name="Gravity" type="Area2D" parent="Planet"]
+[node name="Gravity" type="Area2D" parent="Planet1"]
 collision_layer = 26
 collision_mask = 0
 space_override = 3
@@ -108,7 +108,7 @@ gravity_vec = Vector2( 0, 0 )
 gravity = 200.0
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet/Gravity"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet1/Gravity"]
 visible = false
 shape = SubResource( 3 )
 
