@@ -26,7 +26,7 @@ var active = false
 var changeControl = false
 
 # Imports
-onready var Planet = get_parent().get_parent().get_node("Planet")
+onready var Planet = get_parent().get_parent().get_node("Planet1")
 onready var power_bar = $PowerBar
 onready var sprite = $Sprite
 onready var hp_label = $Label
@@ -37,10 +37,7 @@ var BULLET = preload("res://scenes/soldiers/weapons/bullet.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	animTree.active = true
-	grav_point = Planet.global_position
-	power = 0
 	hp_label.set_text(str(HP))
-	print(grav_point)
 	
 func get_rotation_player(grav_vector):
 	# Funcion que obtienen la rotacion del jugador con respecto al planeta que se encuentra
@@ -60,6 +57,7 @@ func apply_movement(sp, delta):
 		
 	# Se realizan los calculos de los vectores de posicion para los dos ejes
 	sp.x = MAX_SPEED * direction
+	GRAVITY = Planet.get_child(2).gravity * 40
 	if sp.y < GRAVITY:
 		sp.y += GRAVITY * delta
 	
@@ -117,16 +115,9 @@ func is_in_area_gravity():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	# se revisa si es turno del jugador
 	if active:
-		
-		# controles de debug para jugar con la gravedad
-		if Input.is_action_pressed("add_grav"):
-			GRAVITY += 1000
-		elif Input.is_action_pressed("low_grav"):
-			GRAVITY -= 1000
-		
+		print(velocity)
 		# Entra si el jugador va a disparar revisando si se cumple las condiciones necesarias
 		if generate_shoot == true and is_on_floor():
 			
@@ -164,6 +155,12 @@ func _process(delta):
 #Retorna la variable si debe termino el turno
 func getChangeControl():
 	return changeControl
+
+#Funcion que setea a la gravedad a la cual estara sometido el soldado
+func change_gravity_point(new_planet: Node2D):
+	print("change")
+	Planet = new_planet
+	grav_point = Planet.global_position
 
 # Funcion para aplicarle daño al soldado entregandole el daño de origen que recibe
 func take_damage(damage_origin: Node):
