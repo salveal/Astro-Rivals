@@ -1,8 +1,13 @@
-extends MarginContainer
+extends Control
 
-onready var start = $PanelContainer/VBoxContainer/Start
-onready var credits = $PanelContainer/VBoxContainer/Credits
-onready var exit = $PanelContainer/VBoxContainer/Exit
+onready var Background = $ParallaxBackground
+onready var start = $VBoxContainer/Button
+onready var credits = $VBoxContainer/Button2
+onready var exit = $VBoxContainer/Button3
+
+var speed = 5
+var direction = Vector2(-1,0)
+
 
 func _ready():
 	start.connect("pressed", self, "_on_start_pressed")
@@ -17,3 +22,7 @@ func _on_credits_pressed():
 
 func _on_exit_pressed():
 	get_tree().quit()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	Background.scroll_base_offset += direction * speed * delta
