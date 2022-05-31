@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/timerStandby.png-a326c731692d6aafaa6f8053993dd4a1.stex"
+path="res://.import/crystal_01f.png-ba60b3fd713c03a4c39cf6843a3d7a13.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/timerStandby.png"
-dest_files=[ "res://.import/timerStandby.png-a326c731692d6aafaa6f8053993dd4a1.stex" ]
+source_file="res://assets/item/crystal_01f.png"
+dest_files=[ "res://.import/crystal_01f.png-ba60b3fd713c03a4c39cf6843a3d7a13.stex" ]
 
 [params]
 

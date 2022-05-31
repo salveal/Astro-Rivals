@@ -10,7 +10,6 @@ onready var timer_delete = $Timer_delete
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	timer_delete.start()
-	print("Se creo la explosion")
 	
 func init(explosion_position, planet_position):
 	var gravity_vector = (planet_position - global_position).normalized()
@@ -21,16 +20,13 @@ func init(explosion_position, planet_position):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if timer_delete.is_stopped():
-		print("eliminar explosion")
 		queue_free()
 	
 func generate_damage():
-	print("Generando daño")
 	bodies = $Area2D.get_overlapping_bodies()
 	if len(bodies) > 0:
 		damage_value = randi() % 5 + 20
 		for i in bodies:
-			print(i)
 			if i.has_method("take_damage"):
 				i.take_damage(self)
 

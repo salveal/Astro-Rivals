@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/level1_background.png-958229c480aef3d2cc1af4c02f5a2197.stex"
+path="res://.import/timerBlue.png-709bc313a227ca29d75fb5f63272dd7e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/level1_background.png"
-dest_files=[ "res://.import/level1_background.png-958229c480aef3d2cc1af4c02f5a2197.stex" ]
+source_file="res://assets/weapons/ui/timerBlue.png"
+dest_files=[ "res://.import/timerBlue.png-709bc313a227ca29d75fb5f63272dd7e.stex" ]
 
 [params]
 
@@ -19,8 +19,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
-flags/filter=false
+flags/repeat=0
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
