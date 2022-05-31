@@ -455,8 +455,8 @@ outline_color = Color( 1, 0, 0, 1 )
 font_data = SubResource( 46 )
 
 [node name="RedSoldier" type="KinematicBody2D"]
-collision_layer = 13
-collision_mask = 13
+collision_layer = 61
+collision_mask = 29
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

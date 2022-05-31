@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/timerBlue.png-f32020db09fc88b91fc9700d2631bba2.stex"
+path="res://.import/timerStandby.png-1a41fb3800a10e4a0f469c79c86c19cd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/timerBlue.png"
-dest_files=[ "res://.import/timerBlue.png-f32020db09fc88b91fc9700d2631bba2.stex" ]
+source_file="res://assets/weapons/ui/timerStandby.png"
+dest_files=[ "res://.import/timerStandby.png-1a41fb3800a10e4a0f469c79c86c19cd.stex" ]
 
 [params]
 

@@ -26,7 +26,7 @@ var active = false
 var changeControl = false
 
 # Imports
-onready var Planet = get_parent().get_parent().get_node("Planet1")
+onready var Planet
 onready var power_bar = $PowerBar
 onready var sprite = $Sprite
 onready var hp_label = $Label
@@ -117,7 +117,6 @@ func is_in_area_gravity():
 func _process(delta):
 	# se revisa si es turno del jugador
 	if active:
-		print(velocity)
 		# Entra si el jugador va a disparar revisando si se cumple las condiciones necesarias
 		if generate_shoot == true and is_on_floor():
 			

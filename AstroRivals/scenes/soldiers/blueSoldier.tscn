@@ -453,8 +453,8 @@ size = 30
 font_data = SubResource( 46 )
 
 [node name="BluePlayer" type="KinematicBody2D"]
-collision_layer = 13
-collision_mask = 13
+collision_layer = 61
+collision_mask = 29
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]

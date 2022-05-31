@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/logoTemp.png-508eb0f66e8d5b6a67156895c9397a36.stex"
+path="res://.import/timerRed.png-e7d186f78bf9893931ac6e7048f0df65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/logoTemp.png"
-dest_files=[ "res://.import/logoTemp.png-508eb0f66e8d5b6a67156895c9397a36.stex" ]
+source_file="res://assets/weapons/ui/timerRed.png"
+dest_files=[ "res://.import/timerRed.png-e7d186f78bf9893931ac6e7048f0df65.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

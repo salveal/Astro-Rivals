@@ -43,7 +43,6 @@ func _process(delta):
 func check_colision():
 	var bodies = get_colliding_bodies()
 	if len(bodies) > 0 and tick == 0:
-		print(bodies)
 		explosion = EXPLOSION.instance()
 		explosion.init(global_position, grav_point)
 		get_parent().add_child(explosion)

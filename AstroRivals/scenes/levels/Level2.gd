@@ -1,13 +1,19 @@
 extends Node2D
 
+# Objetos y estructuras para el flujo de juego
 onready var queueBlue = $queueBlue
 onready var queueRed = $queueRed
 onready var timerTurn = $TimerTurn
 onready var actualPlayer
+onready var items = [preload("res://scenes/items/minusCrystal.tscn"), preload("res://scenes/items/plusCrystal.tscn")]
+onready var planets = [$Planet1]
+
+# Variables para saber el siguiente soldado del equipo
 var indexBlue = 0
 var indexRed = 0
 var activeTeam # 0 - Blue / 1 - Red
 var stateGame  # tendra un string del siguiente array: ["red", "blue", "standby"]
+var actual_item = 0
 
 func _ready():
 	# Inicia lo necesario para comenzar el juego
@@ -49,6 +55,22 @@ func changeTurn():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if queueRed.get_child_count() == 0:
+		get_tree().change_scene("res://scenes/UI/blueWins.tscn")
+	
+	if queueBlue.get_child_count() == 0:
+		get_tree().change_scene("res://scenes/UI/redWins.tscn")
+	
+	if Input.is_action_just_pressed("change_item"):
+		actual_item = (actual_item + 1) % items.size()
+		
+	if Input.is_action_just_pressed("add_item"):
+		var mouse_position = get_global_mouse_position()
+		var item = items[actual_item].instance()
+		item.init(planets[randi() % planets.size()])
+		item.global_position = mouse_position
+		add_child(item)
 	
 	if stateGame == "standby":
 		if timerTurn.is_stopped():
