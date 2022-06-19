@@ -25,7 +25,7 @@ func _process(delta):
 func generate_damage():
 	bodies = $Area2D.get_overlapping_bodies()
 	if len(bodies) > 0:
-		damage_value = randi() % 5 + 20
+		damage_value = randi() % 10 + 40
 		for i in bodies:
 			if i.has_method("take_damage"):
 				i.take_damage(self)

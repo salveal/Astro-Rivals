@@ -12,6 +12,7 @@ onready var standby = $standBy
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Se crea el timer y se inicializan las variables para indicar que color tiene que poseer
 	var output_print = "Timer Creado con: " + str(secondsTurn)
 	print(output_print)
 	blueUI.visible = false
@@ -43,6 +44,7 @@ func initTimer(team: String):
 	
 func resetTimer():
 	# resetea el timer cambiando el color del font e iniciandolo
+	# además de iniciar de nuevo el contador
 	label.add_color_override("font_color", Color(1,1,1,1))
 	start()
 	print("start timer")

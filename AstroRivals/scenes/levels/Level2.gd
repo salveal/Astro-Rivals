@@ -3,7 +3,7 @@ extends Node2D
 # Objetos y estructuras para el flujo de juego
 onready var queueBlue = $queueBlue
 onready var queueRed = $queueRed
-onready var timerTurn = $TimerTurn
+onready var timerTurn = $HUD/TimerTurn
 onready var actualPlayer
 onready var items = [preload("res://scenes/items/minusCrystal.tscn"), preload("res://scenes/items/plusCrystal.tscn")]
 onready var planets = [$Planet1]
@@ -56,12 +56,14 @@ func changeTurn():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	# Se comprueba si algun jugador no le quedan soldados disponibles
 	if queueRed.get_child_count() == 0:
 		get_tree().change_scene("res://scenes/UI/blueWins.tscn")
 	
 	if queueBlue.get_child_count() == 0:
 		get_tree().change_scene("res://scenes/UI/redWins.tscn")
 	
+	# Input para cambiar entre gemas y colocar gemas de gravedad
 	if Input.is_action_just_pressed("change_item"):
 		actual_item = (actual_item + 1) % items.size()
 		
@@ -72,10 +74,12 @@ func _process(delta):
 		item.global_position = mouse_position
 		add_child(item)
 	
+	# Se revisa el estado del flujo del juego
 	if stateGame == "standby":
 		if timerTurn.is_stopped():
 			changeTurn()
 	
+	# Se entra en este bloque de codigo si el es el turno de un jugador y se evalua si termino o no su turno
 	else:
 		# Se evalua si se debe eliminar el soldado que esta siendo controlado
 		if actualPlayer.needToBeDelete:
