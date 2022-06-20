@@ -9,8 +9,15 @@
 [ext_resource path="res://scenes/soldiers/redSoldier.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/levels/mapLimits.gd" type="Script" id=8]
 [ext_resource path="res://scenes/levels/HUD.gd" type="Script" id=9]
+[ext_resource path="res://scenes/planets/particles_planet_leve1.tres" type="Material" id=10]
 
 [sub_resource type="ImageTexture" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 270.599
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 501.025
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 3.4, 628.5 )
@@ -21,21 +28,6 @@ extents = Vector2( 209.4, 10 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 206.2, 11.5 )
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 270.599
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 501.025
-
-[sub_resource type="ParticlesMaterial" id=7]
-emission_shape = 1
-emission_sphere_radius = 500.0
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.05
-orbit_velocity_random = 0.0
-angle = 90.0
-
 [node name="Level1" type="Node2D"]
 light_mask = 0
 script = ExtResource( 1 )
@@ -44,11 +36,10 @@ script = ExtResource( 1 )
 script = ExtResource( 9 )
 
 [node name="HUDBlueTeam" type="ColorRect" parent="HUD"]
-visible = false
-margin_left = 19.0
-margin_top = 491.0
-margin_right = 119.0
-margin_bottom = 583.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -92.0
+margin_right = 100.0
 color = Color( 0, 0, 0, 0.588235 )
 
 [node name="ProgressBar" type="ProgressBar" parent="HUD/HUDBlueTeam"]
@@ -77,11 +68,12 @@ margin_right = 97.0
 margin_bottom = 89.0
 
 [node name="HUDRedTeam" type="ColorRect" parent="HUD"]
-visible = false
-margin_left = 902.0
-margin_top = 488.0
-margin_right = 1003.0
-margin_bottom = 580.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -101.0
+margin_top = -92.0
 color = Color( 0, 0, 0, 0.588235 )
 
 [node name="ProgressBar" type="ProgressBar" parent="HUD/HUDRedTeam"]
@@ -112,10 +104,11 @@ margin_bottom = 89.0
 rounded = true
 
 [node name="HUDSimple" type="ColorRect" parent="HUD"]
-margin_left = 331.0
-margin_top = -12.0
-margin_right = 684.0
-margin_bottom = 47.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.0
+margin_right = 110.0
+margin_bottom = 59.0
 color = Color( 0, 0, 0, 0.588235 )
 
 [node name="TimerTurn" parent="HUD" instance=ExtResource( 5 )]
@@ -131,6 +124,65 @@ texture = SubResource( 1 )
 position = Vector2( 1183, 604 )
 scale = Vector2( 1.1638, 1.24444 )
 texture = ExtResource( 2 )
+
+[node name="listPlanets" type="Node" parent="."]
+
+[node name="Planet1" type="StaticBody2D" parent="listPlanets"]
+position = Vector2( 1064, 595 )
+collision_layer = 3
+
+[node name="ParticlesGravity" type="Particles2D" parent="listPlanets/Planet1"]
+amount = 35
+lifetime = 100.0
+process_material = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet1"]
+shape = SubResource( 2 )
+
+[node name="Gravity" type="Area2D" parent="listPlanets/Planet1"]
+collision_layer = 26
+collision_mask = 0
+space_override = 3
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 200.0
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet1/Gravity"]
+visible = false
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="listPlanets/Planet1"]
+scale = Vector2( 1.8, 1.83 )
+texture = ExtResource( 4 )
+
+[node name="queueBlue" type="Node" parent="."]
+
+[node name="Blue1" parent="queueBlue" instance=ExtResource( 6 )]
+position = Vector2( 1426, 405 )
+
+[node name="Blue2" parent="queueBlue" instance=ExtResource( 6 )]
+position = Vector2( 612, 741 )
+
+[node name="Blue3" parent="queueBlue" instance=ExtResource( 6 )]
+position = Vector2( 911, 176 )
+
+[node name="Blue4" parent="queueBlue" instance=ExtResource( 6 )]
+position = Vector2( 1140, 994 )
+
+[node name="queueRed" type="Node" parent="."]
+
+[node name="Red1" parent="queueRed" instance=ExtResource( 7 )]
+position = Vector2( 642, 363 )
+
+[node name="Red2" parent="queueRed" instance=ExtResource( 7 )]
+position = Vector2( 1436, 740 )
+
+[node name="Red3" parent="queueRed" instance=ExtResource( 7 )]
+position = Vector2( 1147, 185 )
+
+[node name="Red4" parent="queueRed" instance=ExtResource( 7 )]
+position = Vector2( 885, 988 )
 
 [node name="mapLimits" type="Node" parent="."]
 script = ExtResource( 8 )
@@ -173,63 +225,6 @@ collision_mask = 28
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/rigth"]
 position = Vector2( 204.8, 564.5 )
 shape = SubResource( 4 )
-
-[node name="Planet1" type="StaticBody2D" parent="."]
-position = Vector2( 1064, 595 )
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet1"]
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="Planet1"]
-scale = Vector2( 1.8, 1.83 )
-texture = ExtResource( 4 )
-
-[node name="Gravity" type="Area2D" parent="Planet1"]
-collision_layer = 26
-collision_mask = 0
-space_override = 3
-gravity_point = true
-gravity_vec = Vector2( 0, 0 )
-gravity = 200.0
-script = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet1/Gravity"]
-visible = false
-shape = SubResource( 3 )
-
-[node name="ParticlesGravity" type="Particles2D" parent="Planet1/Gravity"]
-amount = 50
-lifetime = 100.0
-process_material = SubResource( 7 )
-
-[node name="queueBlue" type="Node" parent="."]
-
-[node name="Blue1" parent="queueBlue" instance=ExtResource( 6 )]
-position = Vector2( 1426, 405 )
-
-[node name="Blue2" parent="queueBlue" instance=ExtResource( 6 )]
-position = Vector2( 612, 741 )
-
-[node name="Blue3" parent="queueBlue" instance=ExtResource( 6 )]
-position = Vector2( 911, 176 )
-
-[node name="Blue4" parent="queueBlue" instance=ExtResource( 6 )]
-position = Vector2( 1140, 994 )
-
-[node name="queueRed" type="Node" parent="."]
-
-[node name="Red1" parent="queueRed" instance=ExtResource( 7 )]
-position = Vector2( 642, 363 )
-
-[node name="Red2" parent="queueRed" instance=ExtResource( 7 )]
-position = Vector2( 1436, 740 )
-
-[node name="Red3" parent="queueRed" instance=ExtResource( 7 )]
-position = Vector2( 1147, 185 )
-
-[node name="Red4" parent="queueRed" instance=ExtResource( 7 )]
-position = Vector2( 885, 988 )
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0

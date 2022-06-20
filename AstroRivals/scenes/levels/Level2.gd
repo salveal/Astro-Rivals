@@ -1,12 +1,18 @@
 extends Node2D
 
+# Posiciones fuera de batalla
+var red_dead_pos = [Vector2(-100,0), Vector2(-100,50), Vector2(-100,100), Vector2(-100,150)]
+var blue_dead_pos = [Vector2(-200,0), Vector2(-200,50), Vector2(-200,100), Vector2(-200,150)]
+
 # Objetos y estructuras para el flujo de juego
 onready var queueBlue = $queueBlue
 onready var queueRed = $queueRed
 onready var timerTurn = $HUD/TimerTurn
+onready var hudBlue = $HUD/HUDBlueTeam
+onready var hudRed = $HUD/HUDRedTeam
 onready var actualPlayer
 onready var items = [preload("res://scenes/items/minusCrystal.tscn"), preload("res://scenes/items/plusCrystal.tscn")]
-onready var planets = [$Planet1]
+onready var planets = $listPlanets
 
 # Variables para saber el siguiente soldado del equipo
 var indexBlue = 0
@@ -23,6 +29,7 @@ func _ready():
 
 # Determina que equipo empezara el juego
 func startGame():
+	# Se elige quien va a partir en el juego
 	if randi() % 2 == 0:
 		actualPlayer = queueBlue.get_child(0)
 		activeTeam = 0
@@ -36,6 +43,7 @@ func startGame():
 func changeTurn():
 	# En los dos bloques de codigo de las condiciones se elige al proximo soldado del 
 	# equipo que manejara, iniciando el timer correspondiente
+	
 	if activeTeam == 1: # pasar turno a azul
 		indexBlue = (indexBlue + 1) % queueBlue.get_child_count()
 		actualPlayer = queueBlue.get_child(indexBlue)
@@ -70,8 +78,10 @@ func _process(delta):
 	if Input.is_action_just_pressed("add_item"):
 		var mouse_position = get_global_mouse_position()
 		var item = items[actual_item].instance()
-		item.init(planets[randi() % planets.size()])
+		# item.init(planets(randi() % planets.size()]) como lista de godot
+		item.init(planets.get_child(randi() % planets.get_child_count()))
 		item.global_position = mouse_position
+		item.get_node("Particles2D").process_material = item.get_node("Particles2D").process_material.duplicate()
 		add_child(item)
 	
 	# Se revisa el estado del flujo del juego
