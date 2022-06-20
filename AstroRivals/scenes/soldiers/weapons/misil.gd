@@ -3,7 +3,7 @@ extends RigidBody2D
 # Variables
 var grav_point = Vector2()
 var b_rotation = 0
-onready var Planet = get_parent().get_node("Planet1")
+onready var Planet = get_parent().get_node("listPlanets").get_node("Planet1")
 onready var sprite = $Sprite
 onready var animTree = $AnimationTree
 onready var timer_damage = $Timer_damage

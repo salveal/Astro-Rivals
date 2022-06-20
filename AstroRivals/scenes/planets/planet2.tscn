@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/levels/level1_planet.png" type="Texture" id=1]
 [ext_resource path="res://scenes/planets/planets.gd" type="Script" id=2]
@@ -9,12 +9,22 @@ radius = 119.218
 [sub_resource type="CircleShape2D" id=2]
 radius = 285.028
 
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 260.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.05
+orbit_velocity_random = 0.0
+angle = 90.0
+
 [node name="Planet2" type="StaticBody2D"]
 collision_layer = 45
 collision_mask = 45
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -30,4 +40,10 @@ gravity_vec = Vector2( 0, 0 )
 gravity = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gravity"]
+visible = false
 shape = SubResource( 2 )
+
+[node name="ParticlesGravity" type="Particles2D" parent="Gravity"]
+amount = 50
+lifetime = 100.0
+process_material = SubResource( 5 )
