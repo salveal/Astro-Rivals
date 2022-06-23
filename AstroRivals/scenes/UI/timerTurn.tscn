@@ -9,7 +9,8 @@
 font_path = "res://assets/font/monogram.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 30
+size = 45
+outline_size = 1
 font_data = SubResource( 1 )
 
 [node name="Timer" type="Timer"]
@@ -23,22 +24,23 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="blueTurn" type="Sprite" parent="."]
+visible = false
 position = Vector2( 500, 24 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="standBy" type="Sprite" parent="."]
+visible = false
 position = Vector2( 500, 24 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 483.0
-margin_top = 10.0
-margin_right = 519.0
-margin_bottom = 35.0
+margin_right = 48.0
+margin_bottom = 36.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "XX"
 align = 1

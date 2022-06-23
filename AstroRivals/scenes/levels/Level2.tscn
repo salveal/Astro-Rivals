@@ -1,22 +1,23 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=1]
 [ext_resource path="res://assets/levels/planet4.png" type="Texture" id=2]
 [ext_resource path="res://assets/levels/level3_background.png" type="Texture" id=3]
 [ext_resource path="res://assets/levels/level1_planet.png" type="Texture" id=4]
-[ext_resource path="res://scenes/levels/Level2.gd" type="Script" id=5]
+[ext_resource path="res://scenes/levels/codeLevels.gd" type="Script" id=5]
 [ext_resource path="res://scenes/UI/timerTurn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/soldiers/blueSoldier.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/soldiers/redSoldier.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/levels/mapLimits.gd" type="Script" id=9]
 [ext_resource path="res://scenes/planets/particles_plante_285.tres" type="Material" id=10]
 [ext_resource path="res://scenes/levels/HUD.gd" type="Script" id=11]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 120.0
+[ext_resource path="res://scenes/planets/particles_planet285_negative.tres" type="Material" id=12]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 285.028
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 120.0
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 3.8, 636.5 )
@@ -34,7 +35,6 @@ script = ExtResource( 5 )
 script = ExtResource( 11 )
 
 [node name="HUDBlueTeam" type="ColorRect" parent="HUD"]
-visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -92.0
@@ -66,7 +66,6 @@ margin_right = 97.0
 margin_bottom = 89.0
 
 [node name="HUDRedTeam" type="ColorRect" parent="HUD"]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -103,14 +102,13 @@ margin_bottom = 89.0
 rounded = true
 
 [node name="HUDSimple" type="ColorRect" parent="HUD"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -110.0
-margin_right = 110.0
-margin_bottom = 59.0
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 221.0
+margin_bottom = 45.0
 color = Color( 0, 0, 0, 0.588235 )
 
-[node name="TimerTurn" parent="HUD" instance=ExtResource( 6 )]
+[node name="TimerTurn" parent="HUD/HUDSimple" instance=ExtResource( 6 )]
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 2065.0
@@ -128,13 +126,15 @@ position = Vector2( 1512, 637 )
 collision_layer = 11
 collision_mask = 3
 
-[node name="ParticlesGravity" type="Particles2D" parent="listPlanets/Planet1"]
-amount = 35
+[node name="ParticlesGravityNeg" type="Particles2D" parent="listPlanets/Planet1"]
+amount = 20
+lifetime = 100.0
+process_material = ExtResource( 12 )
+
+[node name="ParticlesGravityPos" type="Particles2D" parent="listPlanets/Planet1"]
+amount = 20
 lifetime = 100.0
 process_material = ExtResource( 10 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet1"]
-shape = SubResource( 1 )
 
 [node name="Gravity" type="Area2D" parent="listPlanets/Planet1"]
 collision_layer = 26
@@ -154,6 +154,9 @@ margin_top = -321.0
 margin_right = 95.0
 margin_bottom = -288.0
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet1"]
+shape = SubResource( 1 )
+
 [node name="Sprite" type="Sprite" parent="listPlanets/Planet1"]
 scale = Vector2( 0.82, 0.8 )
 texture = ExtResource( 2 )
@@ -163,13 +166,15 @@ position = Vector2( 657, 613 )
 collision_layer = 11
 collision_mask = 3
 
-[node name="ParticlesGravity" type="Particles2D" parent="listPlanets/Planet2"]
-amount = 35
+[node name="ParticlesGravityNeg" type="Particles2D" parent="listPlanets/Planet2"]
+amount = 20
+lifetime = 100.0
+process_material = ExtResource( 12 )
+
+[node name="ParticlesGravityPos" type="Particles2D" parent="listPlanets/Planet2"]
+amount = 20
 lifetime = 100.0
 process_material = ExtResource( 10 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet2"]
-shape = SubResource( 1 )
 
 [node name="Gravity" type="Area2D" parent="listPlanets/Planet2"]
 collision_layer = 26
@@ -188,6 +193,9 @@ margin_left = -76.0
 margin_top = -321.0
 margin_right = 95.0
 margin_bottom = -288.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet2"]
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="listPlanets/Planet2"]
 scale = Vector2( 2.5, 2.5 )

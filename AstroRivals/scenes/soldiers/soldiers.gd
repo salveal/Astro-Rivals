@@ -2,7 +2,10 @@ extends KinematicBody2D
 
 # Variables personajes
 var HP = 100
-var needToBeDelete = false
+var isDeath = false
+var alredyDeath = false
+var id
+var team # 0 - blue, 1 - red
 
 # Variables Moviminetos
 var GRAVITY = 5000
@@ -14,6 +17,7 @@ var direction = 0
 var speed = Vector2()
 var velocity = Vector2()
 var grav_point = Vector2()
+var death_pos = Vector2()
 
 # Variables armas
 var bullet
@@ -24,6 +28,10 @@ var power = 0
 # Variables Turnos
 var active = false
 var changeControl = false
+
+# Señales para el hud
+signal damage_to_soldier(team, index, new_healt)
+signal delete_soldier(team, index)
 
 # Imports
 onready var Planet
@@ -165,6 +173,7 @@ func change_gravity_point(new_planet: Node2D):
 func take_damage(damage_origin: Node):
 	HP -= damage_origin.damage_value
 	hp_label.set_text(str(HP))
+	emit_signal("damage_to_soldier", team, id, HP)
 	if HP <= 0:
 		deleteNode()
 
@@ -176,10 +185,8 @@ func colisionShot():
 func deleteNode():
 	# Si es del jugador activo, dejamos que el script del nivel se encargen de eliminar
 	# el personaje
-	if active:
-		needToBeDelete = true
-		
-	# Si no es, entonces podemos eliminarlo normalmente
-	else:
+	isDeath = true
+	if !active:
 		# Aqui deberia haber una animacion de muerte con un timer
-		queue_free()
+		speed = Vector2(0,0)
+		emit_signal("delete_soldier", team, id)
