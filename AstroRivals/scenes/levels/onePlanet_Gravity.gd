@@ -6,9 +6,9 @@ onready var particles_pos = get_parent().get_node("ParticlesGravityPos")
 onready var particles_neg = get_parent().get_node("ParticlesGravityNeg")
 
 # Variables para el cambio de gravedad
-var velocity_gravity = [0.005, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12]
-var list_gravity = [0, 100, 150, 300, 400, 600, 800]
-var actual_level_gravity
+var velocity_gravity = [0.005, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12] # para las particulas
+var list_gravity = [0, 100, 150, 300, 400, 600, 800] # para la variable gravedad del planeta
+var actual_level_gravity # indice con el nivel actual del planeta
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
