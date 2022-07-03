@@ -42,22 +42,23 @@ func startGame():
 	# Se escoge quien va a empezar para el equipo azul
 	randomize()
 	var who_start_red = randi() % queueRed.get_child_count()
+	indexRed = who_start_red
 	
 	# Se escoge quien va a empezar para el equipo rojo
 	randomize()
 	var who_start_blue = randi() % queueBlue.get_child_count()
+	indexBlue = who_start_blue
 
 	# Se elige quien va a partir en el juego
+	randomize()
 	if randi() % 2 == 0:
-		actualPlayer = queueBlue.get_child(who_start_blue)
+		actualPlayer = queueBlue.get_child(indexRed)
 		activeTeam = 0
-		indexRed = who_start_red
 		
 	else:
-		actualPlayer = queueRed.get_child(who_start_red)
+		actualPlayer = queueRed.get_child(indexBlue)
 		activeTeam = 1
-		indexBlue = who_start_blue
-	
+
 	# Cambiamos las variables para el flujo de juego
 	red_soldiers_death = 0
 	blue_soldiers_death = 0
@@ -109,6 +110,8 @@ func changeTurn():
 	# equipo que manejara, iniciando el timer correspondiente
 	
 	if activeTeam == 1:
+		print("pasa al equipo azul")
+		
 		# Se debe pasar el turno al equipo azul
 		indexBlue = (indexBlue + 1) % queueBlue.get_child_count()
 		actualPlayer = queueBlue.get_child(indexBlue)
@@ -122,11 +125,12 @@ func changeTurn():
 
 		# Inicia el turno del equipo rojo
 		activeTeam = 0
+		timerTurn.initTimer("blue")
 		stateGame = "blue"
-		timerTurn.initTimer(stateGame)
 		hudSimple.color = Color(0,0,1.0,0.2)
 
 	else:
+		print("pasa al equipo azul")
 		# Se debe pasar el tunro al equipo rojo
 		indexRed = (indexRed + 1) % queueRed.get_child_count()
 		actualPlayer = queueRed.get_child(indexRed)
@@ -140,8 +144,8 @@ func changeTurn():
 		
 		# Inicia el turno del equipo rojo
 		activeTeam = 1
+		timerTurn.initTimer("red")
 		stateGame = "red"
-		timerTurn.initTimer(stateGame)
 		hudSimple.color = Color(1.0,0,0,0.2)
 	
 	# Se cambia la variable para poder mover al soldado
@@ -171,6 +175,7 @@ func signal_delete_soldier(team: int, index: int):
 
 # Funcion con el codigo necesario para verificar las condiciones de victoria
 func check_win_condition():
+	
 	# Se comprueba si algun jugador no le quedan soldados disponibles
 	if red_soldiers_death == 4:
 		get_tree().change_scene("res://scenes/UI/blueWins.tscn")
@@ -197,7 +202,7 @@ func check_game_flow():
 			actualPlayer.emit_signal("delete_soldier",actualPlayer.team, actualPlayer.id)
 			
 			# Pasamos al estado de Standby
-			stateGame = "stanby"
+			stateGame = "standby"
 			timerTurn.initTimer(stateGame)
 			hudSimple.color = Color(1,1,1,0.40)
 			
@@ -209,7 +214,7 @@ func check_game_flow():
 			actualPlayer.active = false # solo sera necesario cuando acaba el timer, se hizo asi para no repetir codigo
 			
 			# Pasamos el estado de Standby
-			stateGame = "stanby"
+			stateGame = "standby"
 			timerTurn.initTimer(stateGame)
 			hudSimple.color = Color(1,1,1,0.40)
 	
