@@ -8,7 +8,7 @@ var blue_soldiers_death
 
 # Objetos y estructuras para el flujo de juego
 onready var actualPlayer
-onready var queueBlue = $queueBlue
+onready var queueBlue = $queueBlue 
 onready var queueRed = $queueRed
 onready var planets = $listPlanets
 onready var timerTurn = $HUD/HUDSimple/TimerTurn
@@ -23,11 +23,12 @@ var indexRed = 0
 var activeTeam # 0 - Blue / 1 - Red
 var stateGame  # tendra un string del siguiente array: ["red", "blue", "standby"]
 var actual_item = 0
+var soldiers_per_team = 4
 
 func _ready():
 	# Inicia lo necesario para comenzar el juego
-	timerTurn.initTimer("standby")
 	stateGame = "standby"
+	timerTurn.initTimer(stateGame)
 	
 	# variable para randomizar el numero que se ocupara para determinar quien empieza el juego
 	randomize()
@@ -41,43 +42,57 @@ func startGame():
 	# Se escoge quien va a empezar para el equipo azul
 	randomize()
 	var who_start_red = randi() % queueRed.get_child_count()
+	indexRed = who_start_red
 	
 	# Se escoge quien va a empezar para el equipo rojo
 	randomize()
 	var who_start_blue = randi() % queueBlue.get_child_count()
+	indexBlue = who_start_blue
 
 	# Se elige quien va a partir en el juego
+	randomize()
 	if randi() % 2 == 0:
-		actualPlayer = queueBlue.get_child(who_start_blue)
+		actualPlayer = queueBlue.get_child(indexRed)
 		activeTeam = 0
-		indexRed = who_start_red
 		
 	else:
-		actualPlayer = queueRed.get_child(who_start_red)
+		actualPlayer = queueRed.get_child(indexBlue)
 		activeTeam = 1
-		indexBlue = who_start_blue
-	
+
 	# Cambiamos las variables para el flujo de juego
 	red_soldiers_death = 0
 	blue_soldiers_death = 0
 		
 	# Se asocia la informacion para el HUD avanzado
-	# Se asocia el hud del equipo azul
-	for i in range(queueBlue.get_child_count()):
-		print(i)
+	for i in range(soldiers_per_team):
+
+		# Se le asocia los datos del equipo azul al hud azul
+		# Se le otorga una id unica al soldado por equipo y se identifica su equipo
 		queueBlue.get_child(i).id = i
 		queueBlue.get_child(i).team = 0
+
+		# Se entrega la posicion donde se ubicara luego de morir
 		queueBlue.get_child(i).death_pos = blue_dead_pos[i]
+
+		# Se asocia la barra de vida
 		hudBlue.get_child(i).value = queueBlue.get_child(i).HP
+
+		# Se conectan las señales a los soldados
 		queueBlue.get_child(i).connect("damage_to_soldier", self, "signal_damage_to_soldier")
 		queueBlue.get_child(i).connect("delete_soldier", self, "signal_delete_soldier")
 		
-	# Se asocia el hud del equipo rojo
-	for i in range(queueRed.get_child_count()):
+		# Se le asocia los datos del equipo azul al hud azul
+		# Se le otorga una id unica al soldado por equipo y se identifica su equipo
 		queueRed.get_child(i).id = i
 		queueRed.get_child(i).team = 1
+
+		# Se entrega la posicion donde se ubicara luego de morir
 		queueRed.get_child(i).death_pos = red_dead_pos[i]
+
+		# Se asocia la barra de vida
 		hudRed.get_child(i).value = queueRed.get_child(i).HP
+
+		# Se conectan las señales a los soldados
 		queueRed.get_child(i).connect("damage_to_soldier", self, "signal_damage_to_soldier")
 		queueRed.get_child(i).connect("delete_soldier", self, "signal_delete_soldier")
 		
@@ -94,23 +109,40 @@ func changeTurn():
 	# En los dos bloques de codigo de las condiciones se elige al proximo soldado del 
 	# equipo que manejara, iniciando el timer correspondiente
 	
-	if activeTeam == 1: # pasar turno a azul
+	if activeTeam == 1:
+		print("pasa al equipo azul")
+		
+		# Se debe pasar el turno al equipo azul
 		indexBlue = (indexBlue + 1) % queueBlue.get_child_count()
 		actualPlayer = queueBlue.get_child(indexBlue)
+
+		# Se revisa que el jugador actual no este muerto
 		while actualPlayer.isDeath:
+
+			# Se busca al siguiente soldado del equipo
 			indexBlue = (indexBlue + 1) % queueBlue.get_child_count()
 			actualPlayer = queueBlue.get_child(indexBlue)
+
+		# Inicia el turno del equipo rojo
 		activeTeam = 0
 		timerTurn.initTimer("blue")
 		stateGame = "blue"
 		hudSimple.color = Color(0,0,1.0,0.2)
 
-	else: # pasar turno a rojo
+	else:
+		print("pasa al equipo azul")
+		# Se debe pasar el tunro al equipo rojo
 		indexRed = (indexRed + 1) % queueRed.get_child_count()
 		actualPlayer = queueRed.get_child(indexRed)
+
+		# Se revisa que el jugador actual no este muerto
 		while actualPlayer.isDeath:
+
+			# Se busca al siguiente soldado del equipo
 			indexRed = (indexRed + 1) % queueRed.get_child_count()
 			actualPlayer = queueRed.get_child(indexRed)
+		
+		# Inicia el turno del equipo rojo
 		activeTeam = 1
 		timerTurn.initTimer("red")
 		stateGame = "red"
@@ -143,6 +175,7 @@ func signal_delete_soldier(team: int, index: int):
 
 # Funcion con el codigo necesario para verificar las condiciones de victoria
 func check_win_condition():
+	
 	# Se comprueba si algun jugador no le quedan soldados disponibles
 	if red_soldiers_death == 4:
 		get_tree().change_scene("res://scenes/UI/blueWins.tscn")
@@ -169,8 +202,8 @@ func check_game_flow():
 			actualPlayer.emit_signal("delete_soldier",actualPlayer.team, actualPlayer.id)
 			
 			# Pasamos al estado de Standby
-			timerTurn.initTimer("standby")
 			stateGame = "standby"
+			timerTurn.initTimer(stateGame)
 			hudSimple.color = Color(1,1,1,0.40)
 			
 		# Se revisa si se termino el turno del jugador con varias condiciones
@@ -181,8 +214,8 @@ func check_game_flow():
 			actualPlayer.active = false # solo sera necesario cuando acaba el timer, se hizo asi para no repetir codigo
 			
 			# Pasamos el estado de Standby
-			timerTurn.initTimer("standby")
 			stateGame = "standby"
+			timerTurn.initTimer(stateGame)
 			hudSimple.color = Color(1,1,1,0.40)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -194,7 +227,8 @@ func _process(delta):
 	# Input para cambiar entre gemas y colocar gemas de gravedad
 	if Input.is_action_just_pressed("change_item"):
 		actual_item = (actual_item + 1) % items.size()
-		
+	
+	# Input para agregar los itemes de gravedad
 	if Input.is_action_just_pressed("add_item"):
 		var mouse_position = get_global_mouse_position()
 		var item = items[actual_item].instance()
