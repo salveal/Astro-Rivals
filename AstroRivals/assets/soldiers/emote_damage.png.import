@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/timerRed.png-e7d186f78bf9893931ac6e7048f0df65.stex"
+path="res://.import/emote_damage.png-11eecfe9258b940e74079ef1c44fb289.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/ui/timerRed.png"
-dest_files=[ "res://.import/timerRed.png-e7d186f78bf9893931ac6e7048f0df65.stex" ]
+source_file="res://assets/soldiers/emote_damage.png"
+dest_files=[ "res://.import/emote_damage.png-11eecfe9258b940e74079ef1c44fb289.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

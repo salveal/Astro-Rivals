@@ -4,6 +4,7 @@ extends Timer
 var secondsTurn = 15
 var secondsStandby = 5
 var time_lapse
+var last_time
 var split_timer
 var output_timer
 onready var label = $Label
@@ -45,15 +46,15 @@ func initTimer(team: String):
 	
 func resetTimer():
 	# resetea el timer cambiando el color del font e iniciandolo
-	# además de iniciar de nuevo el contador
-	# label.add_color_override("font_color", Color(1,1,1,1))
+	# además de iniciar de nuevo el contador|
 	start()
+	time_lapse = 0
 	print("start timer")
 	
 func change_color():
 	# Codigo para parpadear el contador
 	if time_left < 5.0:
-		label.add_color_override("font_color", Color(1,0,0,1))
+		label.add_color_override("font_color", Color(1,0.5,0,1))
 		
 	elif time_left < 10.0:
 		label.add_color_override("font_color", Color(1,1,0,1))

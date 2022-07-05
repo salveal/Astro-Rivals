@@ -1,5 +1,8 @@
 extends Node2D
 
+# Variables para manejar el hud
+var index_display
+
 # Posiciones fuera de batalla
 var red_dead_pos = [Vector2(-100,0), Vector2(-100,50), Vector2(-100,100), Vector2(-100,150)]
 var blue_dead_pos = [Vector2(-200,0), Vector2(-200,50), Vector2(-200,100), Vector2(-200,150)]
@@ -14,7 +17,7 @@ onready var planets = $listPlanets
 onready var timerTurn = $HUD/HUDSimple/TimerTurn
 onready var hudBlue = $HUD/HUDBlueTeam
 onready var hudRed = $HUD/HUDRedTeam
-onready var hudSimple = $HUD/HUDSimple
+onready var hudSimple = $HUD
 onready var items = [preload("res://scenes/items/minusCrystal.tscn"), preload("res://scenes/items/plusCrystal.tscn")]
 
 # Variables para saber el siguiente soldado del equipo
@@ -23,12 +26,21 @@ var indexRed = 0
 var activeTeam # 0 - Blue / 1 - Red
 var stateGame  # tendra un string del siguiente array: ["red", "blue", "standby"]
 var actual_item = 0
-var soldiers_per_team = 4
+var soldiers_per_team
 
+# Funcion que se ejecutara cuando se cargue por primera vez el nivel
 func _ready():
+	# Determina la cantidad de soldados por equipo / Deben ser iguales
+	if queueBlue.get_child_count() == queueRed.get_child_count():
+		soldiers_per_team = queueBlue.get_child_count()
+		
+	else:
+		push_error("ERROR: En el nivel ocurrio un error con los numeros de soldados por equipo")
+	
 	# Inicia lo necesario para comenzar el juego
 	stateGame = "standby"
 	timerTurn.initTimer(stateGame)
+	index_display = 0
 	
 	# variable para randomizar el numero que se ocupara para determinar quien empieza el juego
 	randomize()
@@ -36,7 +48,7 @@ func _ready():
 	# Se llama la funcion para que realice lo necesario para iniciar el juego
 	startGame()
 
-# Determina que equipo empezara el juego
+# Determina que equipo empezara el juego y asocia las señales necesarias a los soldados
 func startGame():
 	
 	# Se escoge quien va a empezar para el equipo azul
@@ -80,6 +92,7 @@ func startGame():
 		# Se conectan las señales a los soldados
 		queueBlue.get_child(i).connect("damage_to_soldier", self, "signal_damage_to_soldier")
 		queueBlue.get_child(i).connect("delete_soldier", self, "signal_delete_soldier")
+		queueBlue.get_child(i).connect("edit_hud_ammo", self, "signal_edit_hud_ammo")
 		
 		# Se le asocia los datos del equipo azul al hud azul
 		# Se le otorga una id unica al soldado por equipo y se identifica su equipo
@@ -95,6 +108,7 @@ func startGame():
 		# Se conectan las señales a los soldados
 		queueRed.get_child(i).connect("damage_to_soldier", self, "signal_damage_to_soldier")
 		queueRed.get_child(i).connect("delete_soldier", self, "signal_delete_soldier")
+		queueRed.get_child(i).connect("edit_hud_ammo", self, "signal_edit_hud_ammo")
 		
 	# Se hacen unicos los algunas variables de los planetas para que no cambien 
 	# con respecto a la gravedad de otro planeta
@@ -104,7 +118,7 @@ func startGame():
 		planets.get_child(i).get_node("ParticlesGravityPos").process_material = \
 			planets.get_child(i).get_node("ParticlesGravityPos").process_material.duplicate()
 
-# Cambia el turno cambian el equipo
+# Cambia de turno al siguiente soldado del equipo contrario
 func changeTurn():
 	# En los dos bloques de codigo de las condiciones se elige al proximo soldado del 
 	# equipo que manejara, iniciando el timer correspondiente
@@ -127,7 +141,7 @@ func changeTurn():
 		activeTeam = 0
 		timerTurn.initTimer("blue")
 		stateGame = "blue"
-		hudSimple.color = Color(0,0,1.0,0.2)
+		hudSimple.change_color_hud(Color(0,0,1.0,0.58))
 
 	else:
 		print("pasa al equipo azul")
@@ -146,7 +160,7 @@ func changeTurn():
 		activeTeam = 1
 		timerTurn.initTimer("red")
 		stateGame = "red"
-		hudSimple.color = Color(1.0,0,0,0.2)
+		hudSimple.change_color_hud(Color(1.0,0,0,0.58))
 	
 	# Se cambia la variable para poder mover al soldado
 	actualPlayer.active = true
@@ -172,6 +186,12 @@ func signal_delete_soldier(team: int, index: int):
 		queueRed.get_child(index).position = queueRed.get_child(index).death_pos
 		queueRed.get_child(index).alredyDeath = true
 		red_soldiers_death += 1
+
+func signal_edit_hud_ammo(sprite, ammo):
+	hudSimple.get_node("HUDSimple/HUDSimple_left/symbol_weapon").texture = load(sprite)
+	if ammo == "-1":
+		ammo = "99"
+	hudSimple.get_node("HUDSimple/HUDSimple_left/ammo_weapon").set_text("x" + ammo)
 
 # Funcion con el codigo necesario para verificar las condiciones de victoria
 func check_win_condition():
@@ -204,7 +224,7 @@ func check_game_flow():
 			# Pasamos al estado de Standby
 			stateGame = "standby"
 			timerTurn.initTimer(stateGame)
-			hudSimple.color = Color(1,1,1,0.40)
+			hudSimple.change_color_hud(Color(1,1,1,0.58))
 			
 		# Se revisa si se termino el turno del jugador con varias condiciones
 		elif actualPlayer.getChangeControl() or (timerTurn.is_stopped() and stateGame != "standby"):
@@ -216,7 +236,32 @@ func check_game_flow():
 			# Pasamos el estado de Standby
 			stateGame = "standby"
 			timerTurn.initTimer(stateGame)
-			hudSimple.color = Color(1,1,1,0.40)
+			hudSimple.change_color_hud(Color(1,1,1,0.58))
+
+# Funcion para cambiar el hud del juego
+func change_display_hud():
+	index_display = (index_display + 1) % 3
+	
+	# Poner vida sobre los personajes
+	for i in range(queueBlue.get_child_count()):
+		queueBlue.get_child(i).index_display = index_display
+		queueBlue.get_child(i).change_label()
+		queueRed.get_child(i).index_display = index_display
+		queueRed.get_child(i).change_label()
+	
+	# HUD Simple
+	if index_display == 0:
+		hudBlue.visible = false
+		hudRed.visible = false
+		
+	# HUD Medio
+	elif index_display == 1:
+		hudBlue.visible = true
+		hudRed.visible = true
+		
+	# HUD Complejo
+	else:
+		pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -236,6 +281,9 @@ func _process(delta):
 		item.global_position = mouse_position
 		item.get_node("Particles2D").process_material = item.get_node("Particles2D").process_material.duplicate()
 		add_child(item)
+		
+	if Input.is_action_just_pressed("change_hud"):
+		change_display_hud()
 		
 	# Se comprueba el estado del flujo del jugego
 	check_game_flow()
