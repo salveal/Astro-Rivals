@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=1]
 [ext_resource path="res://assets/levels/planet4.png" type="Texture" id=2]
@@ -12,6 +12,15 @@
 [ext_resource path="res://scenes/planets/particles_plante_285.tres" type="Material" id=10]
 [ext_resource path="res://scenes/levels/HUD.gd" type="Script" id=11]
 [ext_resource path="res://scenes/planets/particles_planet285_negative.tres" type="Material" id=12]
+[ext_resource path="res://assets/font/font_levels_gravity.tres" type="DynamicFont" id=13]
+[ext_resource path="res://assets/weapons/arrow.png" type="Texture" id=14]
+[ext_resource path="res://assets/font/monogram.ttf" type="DynamicFontData" id=15]
+
+[sub_resource type="DynamicFont" id=6]
+size = 50
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 15 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 285.028
@@ -20,13 +29,13 @@ radius = 285.028
 radius = 120.0
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 3.8, 636.5 )
+extents = Vector2( 3.55, 567.5 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 211.3, 13.5 )
+extents = Vector2( 197.95, 13.5 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 214.65, 11.5 )
+extents = Vector2( 200.425, 11.5 )
 
 [node name="Level2" type="Node2D"]
 script = ExtResource( 5 )
@@ -37,78 +46,201 @@ script = ExtResource( 11 )
 [node name="HUDBlueTeam" type="ColorRect" parent="HUD"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -92.0
-margin_right = 100.0
-color = Color( 0, 0, 0, 0.588235 )
+margin_top = -200.0
+margin_right = 115.0
+margin_bottom = -108.0
+rect_scale = Vector2( 2, 2 )
+color = Color( 0, 0, 1, 0.588235 )
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD/HUDBlueTeam"]
-margin_left = 23.0
+[node name="HPbarA" type="ProgressBar" parent="HUD/HUDBlueTeam"]
+margin_left = 38.5
 margin_top = 3.0
-margin_right = 97.0
+margin_right = 112.5
 margin_bottom = 17.0
 
-[node name="ProgressBar2" type="ProgressBar" parent="HUD/HUDBlueTeam"]
-margin_left = 22.0
+[node name="HPbarB" type="ProgressBar" parent="HUD/HUDBlueTeam"]
+margin_left = 37.5
 margin_top = 26.0
-margin_right = 97.0
+margin_right = 112.5
 margin_bottom = 40.0
 
-[node name="ProgressBar3" type="ProgressBar" parent="HUD/HUDBlueTeam"]
-margin_left = 22.0
-margin_top = 51.0
-margin_right = 97.0
-margin_bottom = 65.0
+[node name="HPbarC" type="ProgressBar" parent="HUD/HUDBlueTeam"]
+margin_left = 37.5
+margin_top = 50.0
+margin_right = 112.5
+margin_bottom = 64.0
 
-[node name="ProgressBar4" type="ProgressBar" parent="HUD/HUDBlueTeam"]
-margin_left = 22.0
-margin_top = 75.0
-margin_right = 97.0
-margin_bottom = 89.0
+[node name="HPbarD" type="ProgressBar" parent="HUD/HUDBlueTeam"]
+margin_left = 37.5
+margin_top = 74.0
+margin_right = 112.5
+margin_bottom = 88.0
+
+[node name="SoldadoA" type="Label" parent="HUD/HUDBlueTeam"]
+margin_left = 12.0
+margin_top = 3.5
+margin_right = 25.0
+margin_bottom = 17.5
+text = "A"
+
+[node name="SoldadoB" type="Label" parent="HUD/HUDBlueTeam"]
+margin_left = 12.0
+margin_top = 26.0
+margin_right = 25.0
+margin_bottom = 40.0
+text = "B"
+
+[node name="SoldadoC" type="Label" parent="HUD/HUDBlueTeam"]
+margin_left = 12.0
+margin_top = 51.0
+margin_right = 25.0
+margin_bottom = 65.0
+text = "C"
+
+[node name="SoldadoD" type="Label" parent="HUD/HUDBlueTeam"]
+margin_left = 12.0
+margin_top = 74.0
+margin_right = 25.0
+margin_bottom = 88.0
+text = "D"
 
 [node name="HUDRedTeam" type="ColorRect" parent="HUD"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -101.0
-margin_top = -92.0
-color = Color( 0, 0, 0, 0.588235 )
+margin_left = -230.0
+margin_top = -200.0
+margin_right = -115.0
+margin_bottom = -108.0
+rect_scale = Vector2( 2, 2 )
+color = Color( 1, 0, 0, 0.588235 )
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD/HUDRedTeam"]
+[node name="HPbar1" type="ProgressBar" parent="HUD/HUDRedTeam"]
 margin_left = 4.0
 margin_top = 3.0
 margin_right = 78.0
 margin_bottom = 17.0
 
-[node name="ProgressBar2" type="ProgressBar" parent="HUD/HUDRedTeam"]
+[node name="HPbar2" type="ProgressBar" parent="HUD/HUDRedTeam"]
 margin_left = 3.0
 margin_top = 26.0
 margin_right = 78.0
 margin_bottom = 40.0
 rounded = true
 
-[node name="ProgressBar3" type="ProgressBar" parent="HUD/HUDRedTeam"]
+[node name="HPbar3" type="ProgressBar" parent="HUD/HUDRedTeam"]
 margin_left = 3.0
 margin_top = 51.0
 margin_right = 78.0
 margin_bottom = 65.0
 rounded = true
 
-[node name="ProgressBar4" type="ProgressBar" parent="HUD/HUDRedTeam"]
+[node name="HPbar4" type="ProgressBar" parent="HUD/HUDRedTeam"]
 margin_left = 3.0
 margin_top = 75.0
 margin_right = 78.0
 margin_bottom = 89.0
 rounded = true
 
+[node name="SoldadoA" type="Label" parent="HUD/HUDRedTeam"]
+margin_left = 92.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 19.0
+text = "A"
+
+[node name="SoldadoB" type="Label" parent="HUD/HUDRedTeam"]
+margin_left = 92.0
+margin_top = 27.5
+margin_right = 105.0
+margin_bottom = 41.5
+text = "B"
+
+[node name="SoldadoC" type="Label" parent="HUD/HUDRedTeam"]
+margin_left = 92.0
+margin_top = 52.0
+margin_right = 105.0
+margin_bottom = 66.0
+text = "C"
+
+[node name="SoldadoD" type="Label" parent="HUD/HUDRedTeam"]
+margin_left = 92.0
+margin_top = 75.5
+margin_right = 105.0
+margin_bottom = 89.5
+text = "D"
+
 [node name="HUDSimple" type="ColorRect" parent="HUD"]
-margin_left = 1.0
-margin_top = 2.0
-margin_right = 221.0
-margin_bottom = 45.0
-color = Color( 0, 0, 0, 0.588235 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -81.0
+margin_right = 58.0
+margin_bottom = 24.0
+color = Color( 1, 1, 1, 0.392157 )
 
 [node name="TimerTurn" parent="HUD/HUDSimple" instance=ExtResource( 6 )]
+
+[node name="TextureProgress" type="TextureProgress" parent="HUD/HUDSimple"]
+anchor_left = 0.148
+anchor_top = -0.162
+anchor_right = 0.148
+anchor_bottom = -0.162
+margin_left = 8.944
+margin_top = -35.99
+margin_right = 62.944
+margin_bottom = 9.01
+value = 45.0
+fill_mode = 4
+
+[node name="HUDSimple_rigth" type="ColorRect" parent="HUD/HUDSimple"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 139.0
+margin_top = -105.0
+margin_right = 261.0
+color = Color( 1, 1, 1, 0.392157 )
+
+[node name="TextureProgress" type="TextureProgress" parent="HUD/HUDSimple/HUDSimple_rigth"]
+anchor_left = 0.148
+anchor_top = -0.162
+anchor_right = 0.148
+anchor_bottom = -0.162
+margin_left = 14.944
+margin_top = 21.01
+margin_right = 68.944
+margin_bottom = 96.01
+value = 45.0
+fill_mode = 4
+
+[node name="HUDSimple_left" type="ColorRect" parent="HUD/HUDSimple"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -261.0
+margin_top = -105.0
+margin_right = -139.0
+color = Color( 1, 1, 1, 0.392157 )
+
+[node name="symbol_weapon" type="Sprite" parent="HUD/HUDSimple/HUDSimple_left"]
+position = Vector2( 64, 25 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 14 )
+
+[node name="ammo_weapon" type="Label" parent="HUD/HUDSimple/HUDSimple_left"]
+margin_left = 60.0
+margin_top = 40.0
+margin_right = 122.0
+margin_bottom = 84.0
+custom_fonts/font = SubResource( 6 )
+text = "x99"
+align = 1
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 2065.0
@@ -122,7 +254,7 @@ texture = ExtResource( 3 )
 [node name="listPlanets" type="Node" parent="."]
 
 [node name="Planet1" type="StaticBody2D" parent="listPlanets"]
-position = Vector2( 1512, 637 )
+position = Vector2( 1400, 540 )
 collision_layer = 11
 collision_mask = 3
 
@@ -161,8 +293,20 @@ shape = SubResource( 1 )
 scale = Vector2( 0.82, 0.8 )
 texture = ExtResource( 2 )
 
+[node name="levelIndex" type="Label" parent="listPlanets/Planet1"]
+margin_left = -31.0
+margin_top = -90.0
+margin_right = 44.0
+margin_bottom = 231.0
+size_flags_horizontal = 5
+custom_colors/font_color = Color( 0.945098, 0, 1, 1 )
+custom_fonts/font = ExtResource( 13 )
+text = "X
+"
+align = 1
+
 [node name="Planet2" type="StaticBody2D" parent="listPlanets"]
-position = Vector2( 657, 613 )
+position = Vector2( 520, 540 )
 collision_layer = 11
 collision_mask = 3
 
@@ -201,33 +345,45 @@ shape = SubResource( 1 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 4 )
 
+[node name="levelIndex" type="Label" parent="listPlanets/Planet2"]
+margin_left = -31.0
+margin_top = -90.0
+margin_right = 44.0
+margin_bottom = 231.0
+size_flags_horizontal = 5
+custom_colors/font_color = Color( 0.945098, 0, 1, 1 )
+custom_fonts/font = ExtResource( 13 )
+text = "X
+"
+align = 1
+
 [node name="queueBlue" type="Node" parent="."]
 
 [node name="Blue1" parent="queueBlue" instance=ExtResource( 7 )]
-position = Vector2( 657, 421 )
+position = Vector2( 524, 357 )
 
 [node name="Blue2" parent="queueBlue" instance=ExtResource( 7 )]
-position = Vector2( 841, 598 )
+position = Vector2( 708, 534 )
 
 [node name="Blue3" parent="queueBlue" instance=ExtResource( 7 )]
-position = Vector2( 465, 592 )
+position = Vector2( 332, 528 )
 
 [node name="Blue4" parent="queueBlue" instance=ExtResource( 7 )]
-position = Vector2( 659, 791 )
+position = Vector2( 526, 727 )
 
 [node name="queueRed" type="Node" parent="."]
 
 [node name="Red1" parent="queueRed" instance=ExtResource( 8 )]
-position = Vector2( 1517, 426 )
+position = Vector2( 1396, 349 )
 
 [node name="Red2" parent="queueRed" instance=ExtResource( 8 )]
-position = Vector2( 1308, 606 )
+position = Vector2( 1187, 529 )
 
 [node name="Red3" parent="queueRed" instance=ExtResource( 8 )]
-position = Vector2( 1734, 620 )
+position = Vector2( 1613, 543 )
 
 [node name="Red4" parent="queueRed" instance=ExtResource( 8 )]
-position = Vector2( 1517, 817 )
+position = Vector2( 1416, 734 )
 
 [node name="mapLimits" type="Node" parent="."]
 script = ExtResource( 9 )
@@ -238,7 +394,7 @@ collision_layer = 28
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/left"]
-position = Vector2( -5.4, 630.5 )
+position = Vector2( -4.75, 555.5 )
 shape = SubResource( 3 )
 
 [node name="bottom" type="Area2D" parent="mapLimits"]
@@ -248,7 +404,7 @@ collision_layer = 28
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/bottom"]
-position = Vector2( 103.5, 294.5 )
+position = Vector2( 87.65, 121 )
 shape = SubResource( 4 )
 
 [node name="upper" type="Area2D" parent="mapLimits"]
@@ -258,7 +414,7 @@ collision_layer = 28
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/upper"]
-position = Vector2( 99.8, 282 )
+position = Vector2( 85.575, 282 )
 shape = SubResource( 5 )
 
 [node name="rigth" type="Area2D" parent="mapLimits"]
@@ -268,10 +424,9 @@ collision_layer = 28
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/rigth"]
-position = Vector2( 216.4, 624 )
+position = Vector2( 179.9, 529.25 )
 shape = SubResource( 3 )
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
-zoom = Vector2( 2, 2 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Astronaut_Run.png-b3f55862be26c61c07889d8cf19ad687.stex"
+path="res://.import/emote_start.png-31a47acaa7a0f0fdefb8a6d2cc208f27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/soldiers/blue/Astronaut_Run.png"
-dest_files=[ "res://.import/Astronaut_Run.png-b3f55862be26c61c07889d8cf19ad687.stex" ]
+source_file="res://assets/soldiers/emote_start.png"
+dest_files=[ "res://.import/emote_start.png-31a47acaa7a0f0fdefb8a6d2cc208f27.stex" ]
 
 [params]
 

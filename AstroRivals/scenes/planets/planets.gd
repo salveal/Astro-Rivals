@@ -7,7 +7,8 @@ var GRAVITY_FORCE = 200
 func _ready():
 	gravity_node.gravity = GRAVITY_FORCE
 	connect("body_entered", self, "on_gravity_entered")
-	
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
