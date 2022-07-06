@@ -880,8 +880,10 @@ margin_bottom = -22.0
 rect_scale = Vector2( 0.25, 0.25 )
 custom_styles/fg = SubResource( 35 )
 custom_styles/bg = SubResource( 36 )
+min_value = 50.0
 max_value = 200.0
 step = 1.0
+value = 50.0
 rounded = true
 percent_visible = false
 
@@ -913,6 +915,7 @@ align = 1
 [node name="listEmotes" type="Node" parent="."]
 
 [node name="emote_start" type="Sprite" parent="listEmotes"]
+visible = false
 position = Vector2( 0, -50 )
 texture = ExtResource( 8 )
 hframes = 3
@@ -922,6 +925,7 @@ anims/RESET = SubResource( 46 )
 anims/animation_emote = SubResource( 47 )
 
 [node name="emote_damage" type="Sprite" parent="listEmotes"]
+visible = false
 position = Vector2( 0, -50 )
 texture = ExtResource( 9 )
 hframes = 3
@@ -931,6 +935,7 @@ anims/RESET = SubResource( 48 )
 anims/animation_emote = SubResource( 49 )
 
 [node name="emote_time" type="Sprite" parent="listEmotes"]
+visible = false
 position = Vector2( 0, -50 )
 texture = ExtResource( 10 )
 hframes = 3
@@ -940,6 +945,7 @@ anims/RESET = SubResource( 50 )
 anims/animation_emote = SubResource( 51 )
 
 [node name="emote_death" type="Sprite" parent="listEmotes"]
+visible = false
 position = Vector2( 0, -50 )
 texture = ExtResource( 11 )
 hframes = 3

@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scenes/soldiers/weapons/misil/explosion.gd" type="Script" id=1]
+[ext_resource path="res://scenes/soldiers/weapons/proximity_mine/explosion_mine.gd" type="Script" id=1]
 [ext_resource path="res://assets/efects/explosion-6.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 50.0
+radius = 85.0235
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -126,6 +126,7 @@ collision_layer = 28
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+process_priority = 1
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -139,9 +140,8 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-process_priority = 1
-position = Vector2( 1, 0 )
-scale = Vector2( 2.5, 2.5 )
+position = Vector2( -0.5, 0 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 hframes = 8
 

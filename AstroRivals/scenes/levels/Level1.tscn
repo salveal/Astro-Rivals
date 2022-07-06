@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/levels/codeLevels.gd" type="Script" id=1]
 [ext_resource path="res://assets/levels/level2_background.png" type="Texture" id=2]
@@ -11,6 +11,14 @@
 [ext_resource path="res://scenes/levels/HUD.gd" type="Script" id=9]
 [ext_resource path="res://scenes/planets/particles_planet_leve1.tres" type="Material" id=10]
 [ext_resource path="res://assets/font/font_levels_gravity.tres" type="DynamicFont" id=11]
+[ext_resource path="res://assets/weapons/arrow.png" type="Texture" id=12]
+[ext_resource path="res://assets/font/monogram.ttf" type="DynamicFontData" id=13]
+
+[sub_resource type="DynamicFont" id=8]
+size = 50
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 13 )
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -83,9 +91,9 @@ margin_right = 112.5
 margin_bottom = 88.0
 
 [node name="SoldadoA" type="Label" parent="HUD/HUDBlueTeam"]
-margin_left = 12.5
+margin_left = 12.0
 margin_top = 3.5
-margin_right = 25.5
+margin_right = 25.0
 margin_bottom = 17.5
 text = "A"
 
@@ -97,16 +105,16 @@ margin_bottom = 40.0
 text = "B"
 
 [node name="SoldadoC" type="Label" parent="HUD/HUDBlueTeam"]
-margin_left = 12.5
+margin_left = 12.0
 margin_top = 51.0
-margin_right = 25.5
+margin_right = 25.0
 margin_bottom = 65.0
 text = "C"
 
 [node name="SoldadoD" type="Label" parent="HUD/HUDBlueTeam"]
-margin_left = 12.5
+margin_left = 12.0
 margin_top = 74.0
-margin_right = 25.5
+margin_right = 25.0
 margin_bottom = 88.0
 text = "D"
 
@@ -116,9 +124,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -208.0
+margin_left = -230.0
 margin_top = -200.0
-margin_right = -93.0
+margin_right = -115.0
 margin_bottom = -108.0
 rect_scale = Vector2( 2, 2 )
 color = Color( 1, 0, 0, 0.588235 )
@@ -151,30 +159,30 @@ margin_bottom = 89.0
 rounded = true
 
 [node name="SoldadoA" type="Label" parent="HUD/HUDRedTeam"]
-margin_left = 86.0
+margin_left = 92.0
 margin_top = 5.0
-margin_right = 99.0
+margin_right = 105.0
 margin_bottom = 19.0
 text = "A"
 
 [node name="SoldadoB" type="Label" parent="HUD/HUDRedTeam"]
-margin_left = 85.5
+margin_left = 92.0
 margin_top = 27.5
-margin_right = 98.5
+margin_right = 105.0
 margin_bottom = 41.5
 text = "B"
 
 [node name="SoldadoC" type="Label" parent="HUD/HUDRedTeam"]
-margin_left = 86.0
-margin_top = 52.5
-margin_right = 99.0
-margin_bottom = 66.5
+margin_left = 92.0
+margin_top = 52.0
+margin_right = 105.0
+margin_bottom = 66.0
 text = "C"
 
 [node name="SoldadoD" type="Label" parent="HUD/HUDRedTeam"]
-margin_left = 86.0
+margin_left = 92.0
 margin_top = 75.5
-margin_right = 99.0
+margin_right = 105.0
 margin_bottom = 89.5
 text = "D"
 
@@ -234,6 +242,22 @@ margin_left = -261.0
 margin_top = -105.0
 margin_right = -139.0
 color = Color( 1, 1, 1, 0.392157 )
+
+[node name="symbol_weapon" type="Sprite" parent="HUD/HUDSimple/HUDSimple_left"]
+visible = false
+position = Vector2( 64, 25 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 12 )
+
+[node name="ammo_weapon" type="Label" parent="HUD/HUDSimple/HUDSimple_left"]
+visible = false
+margin_left = 60.0
+margin_top = 40.0
+margin_right = 122.0
+margin_bottom = 84.0
+custom_fonts/font = SubResource( 8 )
+text = "x99"
+align = 1
 
 [node name="Background" type="TextureRect" parent="."]
 margin_left = -176.0

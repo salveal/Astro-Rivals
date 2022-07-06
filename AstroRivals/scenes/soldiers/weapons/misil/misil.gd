@@ -21,7 +21,7 @@ func _ready():
 
 # Funcion para asociar el proyectil con el soldado que ejecuto el disparo
 # Aqui se cambian las variables que no se pueden inicializar en _ready()
-func initMisil(soldier: Node):
+func init_weapon(soldier: Node):
 	soldierShot = soldier
 
 # Funcion para calcular la rotacion del misil con respecto al planeta asociado
