@@ -32,16 +32,16 @@ var power = 0
 var list_weapons = [ \
 	preload("res://scenes/soldiers/weapons/arrow/arrow.tscn"), \
 	preload("res://scenes/soldiers/weapons/misil/bullet.tscn"), \
-	preload("res://scenes/soldiers/weapons/misil/bullet.tscn"), \
-	preload("res://scenes/soldiers/weapons/misil/bullet.tscn") ]
+	preload("res://scenes/soldiers/weapons/proximity_mine/mine.tscn"), \
+	preload("res://scenes/soldiers/weapons/ligthsable/red_lightsable.tscn") ]
 	
 var sprite_symbol_weapons = [
 	"res://assets/weapons/arrow.png", \
 	"res://assets/weapons/misil_symbol.png", \
-	"res://assets/weapons/misil_symbol.png", \
-	"res://icon.png" ]
+	"res://assets/weapons/proximity_mine.png", \
+	"res://assets/weapons/red_ligthBlade.png" ]
 	
-var ammo_weapons = [-1, 5, 1, 1]
+var ammo_weapons = [-1, 2, 1, 1]
 
 # Variables Turnos
 var active = false
@@ -68,7 +68,7 @@ func _ready():
 	index_display = 0
 	actual_weapon = 0
 	actual_weapon_symbol = str(sprite_symbol_weapons[actual_weapon])
-	
+		
 # Funcion que obtienen la rotacion del jugador con respecto al planeta que se encuentra
 func get_rotation_player(grav_vector):
 	var rotation = Vector2(0,1)
@@ -187,12 +187,10 @@ func change_label():
 	else:
 		label.set_text(letters_soldiers[id])
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Funcino para determinar si hay que cambiar el arma activa al soldado
+func change_weapon():
 	
-	# se revisa si es turno del jugador
-	if active:
-		
+	if not generate_shoot:
 		# Se revisa si se debe cambiar a algun arma
 		if Input.is_action_just_pressed("weapon_1"):
 			actual_weapon = 0			
@@ -203,52 +201,74 @@ func _process(delta):
 			actual_weapon = 1
 			actual_weapon_symbol = sprite_symbol_weapons[actual_weapon]
 			emit_signal("edit_hud_ammo", actual_weapon_symbol, str(ammo_weapons[actual_weapon]))
-			
+				
 		elif Input.is_action_just_pressed("weapon_3"):
 			actual_weapon = 2
 			actual_weapon_symbol = sprite_symbol_weapons[actual_weapon]
 			emit_signal("edit_hud_ammo", actual_weapon_symbol, str(ammo_weapons[actual_weapon]))
-			
+				
 		elif Input.is_action_just_pressed("weapon_4"):
 			actual_weapon = 3
 			actual_weapon_symbol = sprite_symbol_weapons[actual_weapon]
 			emit_signal("edit_hud_ammo", actual_weapon_symbol, str(ammo_weapons[actual_weapon]))
 		
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	# se revisa si es turno del jugador
+	if active:
+		
+		# Se revisa si se cambio el arma
+		change_weapon()
+		
 		# Entra si el jugador va a disparar revisando si se cumple las condiciones necesarias
 		if generate_shoot == true and is_on_floor():
 			
-			# condicion para cambiar el valor de rate para que no salga de los rangos establecidos
-			if generate_shoot and (power > MAX_POWER or power < MIN_POWER):
-				rate = -rate
-			
-			# Se suma el rate
-			power += rate
-			power_bar.value = power
-			
-			# Se revisa si se debe disparar
-			if Input.is_action_just_released("shoot"):
-				# Dejamos de mover al soldado
-				active = false
-					
-				# Creamos la instancia de la bala seleccionada, seteamos su posicion y velocidades
-				# y la agregamos al arbol del nivel
-				weapon = list_weapons[actual_weapon].instance()
-				weapon.initMisil(self)
-				var mouse_position = get_global_mouse_position()
-				weapon.global_position = global_position - (global_position - mouse_position).normalized() * 50
-				weapon.linear_velocity = (mouse_position - global_position).normalized() * power * 2
-				get_parent().get_parent().add_child(weapon)
+			if actual_weapon != 3:
 				
-				# Se reduce su variable asociada en el listado de municion
-				# -1 indica municion infinita, asi no sigue disminuyendo
-				if 0 < ammo_weapons[actual_weapon]:
-					ammo_weapons[actual_weapon] = ammo_weapons[actual_weapon] - 1
-					
-				# Se cambian las variables del soldado para poder pasar el turno al siguiente soldado
-				generate_shoot = false
-				power = 0
+				# condicion para cambiar el valor de rate para que no salga de los rangos establecidos
+				if generate_shoot and (power > MAX_POWER or power < MIN_POWER):
+					rate = -rate
+				
+				# Se suma el rate
+				power += rate
 				power_bar.value = power
 				
+				# Se revisa si se debe disparar
+				if Input.is_action_just_released("shoot"):
+					
+					# Dejamos de mover al soldado
+					active = false
+					generate_shoot = false
+					
+					# Creamos la instancia de la bala seleccionada,
+					weapon = list_weapons[actual_weapon].instance()
+					weapon.init_weapon(self)
+					var mouse_position = get_global_mouse_position()
+					weapon.global_position = global_position - (global_position - mouse_position).normalized() * 50
+					weapon.linear_velocity = (mouse_position - global_position).normalized() * power * 2
+					get_parent().get_parent().add_child(weapon)
+						
+					# Se reduce su variable asociada en el listado de municion
+					# -1 indica municion infinita, asi no sigue disminuyendo
+					if 0 < ammo_weapons[actual_weapon]:
+						ammo_weapons[actual_weapon] = ammo_weapons[actual_weapon] - 1
+							
+					# Se cambian las variables del soldado para poder pasar el turno al siguiente soldado
+					power = 0
+					power_bar.value = power
+					
+					emit_signal("edit_hud_ammo", actual_weapon_symbol, str(ammo_weapons[actual_weapon]))
+			
+			else:
+				# Caso para el sable de luz 
+				# Creamos la instancia de la bala seleccionada,
+				weapon = list_weapons[actual_weapon].instance()
+				weapon.init_weapon(self)
+				var mouse_position = get_global_mouse_position()
+				weapon.global_position = global_position - (global_position - mouse_position).normalized() * 10
+
+				get_parent().get_parent().add_child(weapon)
+				generate_shoot = false
 				emit_signal("edit_hud_ammo", actual_weapon_symbol, str(ammo_weapons[actual_weapon]))
 		
 					

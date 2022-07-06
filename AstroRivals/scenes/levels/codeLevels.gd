@@ -94,6 +94,10 @@ func startGame():
 		queueBlue.get_child(i).connect("delete_soldier", self, "signal_delete_soldier")
 		queueBlue.get_child(i).connect("edit_hud_ammo", self, "signal_edit_hud_ammo")
 		
+	
+		queueBlue.get_child(i).sprite_symbol_weapons[3] = "res://assets/weapons/blue_lightBlade.png"
+		queueBlue.get_child(i).list_weapons[3] = load("res://scenes/soldiers/weapons/ligthsable/blue_ligthsable.tscn")
+		
 		# Se le asocia los datos del equipo azul al hud azul
 		# Se le otorga una id unica al soldado por equipo y se identifica su equipo
 		queueRed.get_child(i).id = i
@@ -142,6 +146,7 @@ func changeTurn():
 		timerTurn.initTimer("blue")
 		stateGame = "blue"
 		hudSimple.change_color_hud(Color(0,0,1.0,0.58))
+		hudSimple.show_gui_ammo()
 
 	else:
 		print("pasa al equipo azul")
@@ -161,9 +166,11 @@ func changeTurn():
 		timerTurn.initTimer("red")
 		stateGame = "red"
 		hudSimple.change_color_hud(Color(1.0,0,0,0.58))
+		hudSimple.show_gui_ammo()
 	
 	# Se cambia la variable para poder mover al soldado
 	actualPlayer.active = true
+	actualPlayer.emit_signal("edit_hud_ammo", actualPlayer.actual_weapon_symbol, str(actualPlayer.ammo_weapons[actualPlayer.actual_weapon]))
 	
 # Esta funcion se encargara de editar el valor de la bara de vida
 # del soldado asociado cuando este reciba daño
@@ -187,6 +194,7 @@ func signal_delete_soldier(team: int, index: int):
 		queueRed.get_child(index).alredyDeath = true
 		red_soldiers_death += 1
 
+# Señal para editar el hud del arma y la municion del soldado activo 
 func signal_edit_hud_ammo(sprite, ammo):
 	hudSimple.get_node("HUDSimple/HUDSimple_left/symbol_weapon").texture = load(sprite)
 	if ammo == "-1":
@@ -225,6 +233,7 @@ func check_game_flow():
 			stateGame = "standby"
 			timerTurn.initTimer(stateGame)
 			hudSimple.change_color_hud(Color(1,1,1,0.58))
+			hudSimple.hidden_gui_ammo()
 			
 		# Se revisa si se termino el turno del jugador con varias condiciones
 		elif actualPlayer.getChangeControl() or (timerTurn.is_stopped() and stateGame != "standby"):
@@ -237,6 +246,7 @@ func check_game_flow():
 			stateGame = "standby"
 			timerTurn.initTimer(stateGame)
 			hudSimple.change_color_hud(Color(1,1,1,0.58))
+			hudSimple.hidden_gui_ammo()
 
 # Funcion para cambiar el hud del juego
 func change_display_hud():
