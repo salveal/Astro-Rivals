@@ -1,8 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/redWins.png" type="Texture" id=1]
+[ext_resource path="res://assets/font/font8bits.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/UI/wins.gd" type="Script" id=2]
 [ext_resource path="res://assets/levels/menu_background.png" type="Texture" id=3]
+[ext_resource path="res://assets/redWins.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.694118, 0.239216, 0.505882, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.643137, 0.345098, 0.74902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.4, 0.0745098, 0.364706, 1 )
+
+[sub_resource type="Theme" id=4]
+Button/styles/hover = SubResource( 1 )
+Button/styles/normal = SubResource( 2 )
+Button/styles/pressed = SubResource( 3 )
 
 [node name="redWins" type="Control"]
 margin_right = 40.0
@@ -10,21 +25,21 @@ margin_bottom = 40.0
 script = ExtResource( 2 )
 
 [node name="MenuBackground" type="Sprite" parent="."]
-position = Vector2( 956, 539 )
+position = Vector2( 952, 538 )
+scale = Vector2( 1.03542, 1.03704 )
 texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 522, 185 )
-scale = Vector2( 0.872256, 0.947368 )
-texture = ExtResource( 1 )
+position = Vector2( 960, 270 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 352.0
-margin_top = 443.0
-margin_right = 646.0
-margin_bottom = 474.0
-
-[node name="Button3" type="Button" parent="VBoxContainer"]
-margin_right = 294.0
-margin_bottom = 20.0
+[node name="Button3" type="Button" parent="."]
+margin_left = 666.0
+margin_top = 756.0
+margin_right = 960.0
+margin_bottom = 784.0
+rect_scale = Vector2( 2, 2 )
+theme = SubResource( 4 )
+custom_fonts/font = ExtResource( 1 )
 text = "Exit"

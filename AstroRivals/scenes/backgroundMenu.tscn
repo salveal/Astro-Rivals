@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/levels/level4_background.png" type="Texture" id=1]
 [ext_resource path="res://scenes/backgroundMenu.gd" type="Script" id=2]
 [ext_resource path="res://assets/logoTemp.png" type="Texture" id=3]
+[ext_resource path="res://scenes/UI/menu_theme.tres" type="Theme" id=4]
 
 [sub_resource type="Theme" id=1]
 
@@ -38,6 +39,7 @@ margin_top = -809.0
 margin_right = -626.5
 margin_bottom = -716.0
 rect_scale = Vector2( 2.5, 2.5 )
+theme = ExtResource( 4 )
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 margin_right = 301.0
@@ -48,13 +50,13 @@ text = "Level 1"
 [node name="Button2" type="Button" parent="VBoxContainer"]
 margin_top = 24.0
 margin_right = 301.0
-margin_bottom = 44.0
+margin_bottom = 37.0
 text = "Level 2"
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
+margin_top = 41.0
 margin_right = 301.0
-margin_bottom = 68.0
+margin_bottom = 54.0
 text = "Exit"
 
 [node name="Sprite" type="Sprite" parent="."]

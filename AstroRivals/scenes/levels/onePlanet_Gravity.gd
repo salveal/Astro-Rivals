@@ -29,7 +29,7 @@ func change_gravity_level(index: int):
 	particles_pos.process_material.orbit_velocity = velocity_gravity[index]
 	particles_neg.process_material.orbit_velocity = -velocity_gravity[index]
 	
-	GUI_level.set_text(str(actual_level_gravity) + "g")
+	GUI_level.set_text(str(actual_level_gravity))
 	GUI_level.add_color_override("font_color", color_gravity[actual_level_gravity])
 	
 	change_bodies_gravity()

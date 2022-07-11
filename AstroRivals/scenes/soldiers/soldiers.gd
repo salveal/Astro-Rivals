@@ -53,7 +53,7 @@ signal delete_soldier(team, index)
 signal edit_hud_ammo(sprite, ammo)
 
 # Imports
-onready var Planet
+onready var Planet = get_parent().get_parent().get_node("listPlanets/Planet1")
 onready var power_bar = $PowerBar
 onready var sprite = $Sprite
 onready var label = $Label
@@ -150,7 +150,6 @@ func getChangeControl():
 
 #Funcion que setea a la gravedad a la cual estara sometido el soldado
 func change_gravity_point(new_planet: Node2D):
-	print("change")
 	Planet = new_planet
 	grav_point = Planet.global_position
 
@@ -159,8 +158,9 @@ func take_damage(damage_origin: Node):
 	HP -= damage_origin.damage_value
 	change_label()
 	emit_signal("damage_to_soldier", team, id, HP)
-	listEmotes.get_node("emote_damage/AnimationPlayer").play("animation_emote")
 	if HP <= 0:
+		if active: 
+			pass
 		deleteNode()
 
 # Funcion que sera llamada para indicar que choco el proyectil enviado por el mismo soldado
@@ -181,7 +181,6 @@ func deleteNode():
 
 # Ve si debe cambiar el label del jugador dependiendo del tipo de hud
 func change_label():
-	print(index_display)
 	if index_display == 0:
 		label.set_text(str(HP))
 	else:

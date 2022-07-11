@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=1]
 [ext_resource path="res://assets/levels/planet4.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/font/font_levels_gravity.tres" type="DynamicFont" id=13]
 [ext_resource path="res://assets/weapons/arrow.png" type="Texture" id=14]
 [ext_resource path="res://assets/font/monogram.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://scenes/UI/pause_menu.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=6]
 size = 50
@@ -246,6 +247,9 @@ custom_fonts/font = SubResource( 6 )
 text = "x99"
 align = 1
 
+[node name="menu_pause" parent="HUD" instance=ExtResource( 16 )]
+visible = false
+
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 2065.0
 margin_bottom = 1203.0
@@ -388,6 +392,10 @@ position = Vector2( 1613, 543 )
 
 [node name="Red4" parent="queueRed" instance=ExtResource( 8 )]
 position = Vector2( 1416, 734 )
+
+[node name="queuePlusCrystal" type="Node" parent="."]
+
+[node name="queueMinusCrystal" type="Node" parent="."]
 
 [node name="mapLimits" type="Node" parent="."]
 script = ExtResource( 9 )
