@@ -16,16 +16,19 @@ func init(planet: Node2D):
 func check_colision():
 	var bodies = get_colliding_bodies()
 	if len(bodies) > 0:
-		var actual_gravity = associated_planet.get_child(2).gravity
-		associated_planet.get_child(2).add_level_gravity()
-		print(associated_planet)
-		print("ha cambiado su gravedad")
-		queue_free()
+		break_gem()
 
 func change_direction_particles():
 	direction_particles = (associated_planet.position - global_position).normalized() * 100
 	direction_particles = Vector3(direction_particles.x, direction_particles.y, 0)
 	particles.process_material.gravity = direction_particles
+
+func break_gem():
+	var actual_gravity = associated_planet.get_child(2).gravity
+	associated_planet.get_child(2).add_level_gravity()
+	print(associated_planet)
+	print("ha cambiado su gravedad")
+	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
