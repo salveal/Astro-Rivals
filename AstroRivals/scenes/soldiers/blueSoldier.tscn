@@ -945,3 +945,7 @@ hframes = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="listEmotes/emote_death"]
 anims/RESET = SubResource( 52 )
 anims/animation_emote = SubResource( 53 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+rotating = true
+zoom = Vector2( 0.5, 0.5 )

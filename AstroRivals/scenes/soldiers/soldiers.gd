@@ -60,6 +60,7 @@ onready var label = $Label
 onready var animTree = $AnimationTree
 onready var listEmotes = $listEmotes
 onready var playback = animTree.get("parameters/playback")
+onready var camera = $Camera2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
