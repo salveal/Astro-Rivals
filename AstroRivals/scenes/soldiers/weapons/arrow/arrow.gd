@@ -7,6 +7,7 @@ var damage_value
 onready var Planet = get_parent().get_node("listPlanets").get_node("Planet1")
 onready var sprite = $Sprite
 onready var soldierShot
+onready var camera = $Camera2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,11 +46,13 @@ func deleteNode():
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	var gravity_vector = (grav_point - position).normalized()
 	var linear_vel = get_linear_velocity()
 	if linear_vel.length() > 20:
 		b_rotation = get_rotation_player(linear_vel.normalized())
 		set_rotation(b_rotation)
+	#print("Linear Vel", linear_vel)
+	#print("Position", position)
 		
 	check_colision()

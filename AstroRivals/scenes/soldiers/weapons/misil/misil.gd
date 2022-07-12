@@ -9,6 +9,7 @@ onready var animTree = $AnimationTree
 onready var timer_damage = $Timer_damage
 onready var playback = animTree.get("parameters/playback")
 onready var soldierShot
+onready var camera = $Camera2D
 var EXPLOSION = preload("res://scenes/soldiers/weapons/misil/explosion.tscn")
 var tick = 0
 var explosion
@@ -30,7 +31,7 @@ func get_rotation_player(vel_vector):
 	return rotation.angle_to(vel_vector)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	var gravity_vector = (grav_point - position).normalized()
 	var linear_vel = get_linear_velocity()
 	if linear_vel.length() > 20:

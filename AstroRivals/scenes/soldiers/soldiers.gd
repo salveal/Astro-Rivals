@@ -247,8 +247,9 @@ func _process(delta):
 					var mouse_position = get_global_mouse_position()
 					weapon.global_position = global_position - (global_position - mouse_position).normalized() * 50
 					weapon.linear_velocity = (mouse_position - global_position).normalized() * power * 2
+					#weapon.set_deferred("linear_velocity", (mouse_position - global_position).normalized() * power * 2)
 					get_parent().get_parent().add_child(weapon)
-						
+					
 					# Se reduce su variable asociada en el listado de municion
 					# -1 indica municion infinita, asi no sigue disminuyendo
 					if 0 < ammo_weapons[actual_weapon]:
@@ -267,7 +268,6 @@ func _process(delta):
 				weapon.init_weapon(self)
 				var mouse_position = get_global_mouse_position()
 				weapon.global_position = global_position - (global_position - mouse_position).normalized() * 10
-
 				get_parent().get_parent().add_child(weapon)
 				generate_shoot = false
 				emit_signal("edit_hud_ammo", actual_weapon_symbol, str(ammo_weapons[actual_weapon]))

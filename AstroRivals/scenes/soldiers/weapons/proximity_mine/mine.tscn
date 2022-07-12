@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/weapons/proximity_mine.png" type="Texture" id=1]
 [ext_resource path="res://scenes/soldiers/weapons/proximity_mine/mine.gd" type="Script" id=2]
+[ext_resource path="res://scenes/soldiers/weapons/throwableCamera.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 12 )
@@ -39,3 +40,8 @@ collision_mask = 12
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaVision"]
 position = Vector2( 0, -16 )
 shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+rotating = true
+zoom = Vector2( 0.5, 0.5 )
+script = ExtResource( 3 )

@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/soldiers/weapons/misil/misil.gd" type="Script" id=1]
 [ext_resource path="res://assets/weapons/RPG-round.png" type="Texture" id=2]
+[ext_resource path="res://scenes/soldiers/weapons/throwableCamera.gd" type="Script" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
@@ -226,3 +227,8 @@ parameters/playback = SubResource( 10 )
 [node name="Timer_damage" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+rotating = true
+zoom = Vector2( 0.5, 0.5 )
+script = ExtResource( 3 )

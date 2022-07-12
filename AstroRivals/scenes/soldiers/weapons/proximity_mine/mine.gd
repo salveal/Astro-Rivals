@@ -8,6 +8,7 @@ onready var sprite = $Sprite
 onready var area_vision = $AreaVision
 onready var timer_damage = $Timer_damage
 onready var soldierShot
+onready var camera = $Camera2D
 var EXPLOSION = preload("res://scenes/soldiers/weapons/proximity_mine/explosion_mine.tscn")
 var tick = 0
 var explosion
@@ -66,5 +67,5 @@ func deleteNode():
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	check_colision()
