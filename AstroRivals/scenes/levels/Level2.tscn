@@ -249,6 +249,7 @@ align = 1
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 2065.0
 margin_bottom = 1203.0
+stretch_mode = 2
 
 [node name="Sprite" type="Sprite" parent="Background"]
 position = Vector2( 1044.75, 628.75 )

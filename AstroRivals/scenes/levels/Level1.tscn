@@ -267,9 +267,10 @@ margin_bottom = 117.0
 texture = SubResource( 1 )
 
 [node name="Level1Background" type="Sprite" parent="Background"]
-position = Vector2( 1183, 604 )
-scale = Vector2( 1.1638, 1.24444 )
+position = Vector2( 4799, 544 )
+scale = Vector2( 2.41295, 2.68322 )
 texture = ExtResource( 2 )
+offset = Vector2( -1497.68, 0 )
 
 [node name="listPlanets" type="Node" parent="."]
 

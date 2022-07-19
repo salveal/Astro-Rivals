@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://assets/soldiers/blue/Astronaut_Jump.png" type="Texture" id=1]
 [ext_resource path="res://assets/soldiers/blue/Astronaut_Death.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/soldiers/emote_damage.png" type="Texture" id=8]
 [ext_resource path="res://assets/soldiers/emote_time.png" type="Texture" id=9]
 [ext_resource path="res://assets/soldiers/emote_dead.png" type="Texture" id=10]
+[ext_resource path="res://scenes/soldiers/playerCamera.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 8.25, 8.75 )
@@ -949,3 +950,6 @@ anims/animation_emote = SubResource( 53 )
 [node name="Camera2D" type="Camera2D" parent="."]
 rotating = true
 zoom = Vector2( 0.5, 0.5 )
+script = ExtResource( 11 )
+
+[node name="Tween" type="Tween" parent="Camera2D"]
