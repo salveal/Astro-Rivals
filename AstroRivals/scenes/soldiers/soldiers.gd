@@ -268,6 +268,12 @@ func _process(delta):
 
 				get_parent().get_parent().add_child(weapon)
 				generate_shoot = false
+				
+				# Se reduce su variable asociada en el listado de municion
+				# -1 indica municion infinita, asi no sigue disminuyendo
+				if 0 < ammo_weapons[actual_weapon]:
+					ammo_weapons[actual_weapon] = ammo_weapons[actual_weapon] - 1
+
 				emit_signal("edit_hud_ammo", actual_weapon_symbol, str(ammo_weapons[actual_weapon]))
 		
 					

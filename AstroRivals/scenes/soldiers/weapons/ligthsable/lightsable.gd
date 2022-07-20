@@ -21,7 +21,8 @@ func init_weapon(soldier: Node):
 func check_damage():
 	var bodies = area_damage.get_overlapping_bodies()
 	for body in bodies:
-		if body.has_method("take_damage"):
+		randomize()
+		if body.has_method("take_damage") and randi() % 2 == 0:
 			body.take_damage(self)
 
 # Envia la señal para indicar que el misil choco y exploto al soldado
