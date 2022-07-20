@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/levels/background_level1.png" type="Texture" id=1]
+[ext_resource path="res://assets/levels/planet3.png" type="Texture" id=3]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( -3, 6 )
+
+[node name="Level1Background" type="Sprite" parent="."]
+position = Vector2( 1228, 376 )
+scale = Vector2( 1.1638, 1.24444 )
+texture = ExtResource( 1 )
+offset = Vector2( -252.621, 174.376 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 950, 526 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
