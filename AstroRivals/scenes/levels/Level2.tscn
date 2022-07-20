@@ -530,7 +530,7 @@ position = Vector2( 179.875, 523.875 )
 shape = SubResource( 7 )
 
 [node name="meteorParticleDown" type="Particles2D" parent="mapLimits/rigth"]
-position = Vector2( 174.875, 524.875 )
+position = Vector2( 180.2, -30 )
 amount = 20
 lifetime = 10.0
 process_material = SubResource( 8 )

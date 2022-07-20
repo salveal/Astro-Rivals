@@ -5,7 +5,8 @@ onready var Background = $ParallaxBackground
 onready var level1 = $VBoxContainer/Button
 onready var level2 = $VBoxContainer/Button2
 onready var level3 = $VBoxContainer/Button3
-onready var backToMenu = $Button4
+onready var level4 = $VBoxContainer/Button4
+onready var backToMenu = $ButtonBack
 
 var speed = 5
 var direction = Vector2(-1,0)
@@ -17,6 +18,7 @@ func _ready():
 	level1.connect("pressed", self, "_level1_selected")
 	level2.connect("pressed",self,"_level2_selected")
 	level3.connect("pressed", self, "_level3_selected")
+	level4.connect("pressed", self, "_level4_selected")
 	backToMenu.connect("pressed", self, "_on_exit_pressed")
 	
 # Funcion para poder remplazar la escena y poder 
@@ -55,6 +57,15 @@ func _level3_selected():
 	]
 	replace_scene()
 
+# Funcion para cargar el nivel 3
+func _level4_selected():
+	string_scene = "res://scenes/levels/Level4.tscn"
+	spawn_area_items = [
+		{"top_left": Vector2(128,64), "y_len": 256, "x_len": 1024},
+		{"top_left": Vector2(832,704), "y_len": 256, "x_len": 1024}
+	]
+	replace_scene()
+
 # Fucion para poder volver al menu principal
 func _on_exit_pressed():
 	scene = load("res://scenes/backgroundMenu.tscn").instance()
@@ -71,6 +82,9 @@ func buttons_hovered():
 		
 	elif level3.is_hovered():
 		preview_sprite.texture = load("res://assets/levels/preview_levels/preview_level3.png")
+	
+	elif level4.is_hovered():
+		preview_sprite.texture = load("res://assets/levels/preview_levels/preview_level4.png")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
