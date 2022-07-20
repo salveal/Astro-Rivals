@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/levels/codeLevels.gd" type="Script" id=1]
-[ext_resource path="res://assets/levels/level2_background.png" type="Texture" id=2]
+[ext_resource path="res://assets/levels/background_level1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=3]
 [ext_resource path="res://assets/levels/planet3.png" type="Texture" id=4]
 [ext_resource path="res://scenes/UI/timerTurn.tscn" type="PackedScene" id=5]
