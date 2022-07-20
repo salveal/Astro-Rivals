@@ -3,6 +3,7 @@ extends Control
 onready var Background = $ParallaxBackground
 onready var start = $VBoxContainer/Button
 onready var credits = $VBoxContainer/Button2
+onready var controls = $VBoxContainer/Button4
 onready var exit = $VBoxContainer/Button3
 
 var speed = 5
@@ -14,6 +15,7 @@ var string_scene
 func _ready():
 	start.connect("pressed", self, "_on_start_pressed")
 	credits.connect("pressed",self,"_on_credits_pressed")
+	controls.connect("pressed",self,"_on_controls_pressed")
 	exit.connect("pressed", self, "_on_exit_pressed")
 
 func replace_scene():
@@ -29,7 +31,14 @@ func _on_start_pressed():
 	get_tree().get_root().remove_child(self)
 	
 func _on_credits_pressed():
-	pass
+	var scene = load("res://scenes/levels/Credits.tscn").instance()
+	get_tree().get_root().add_child(scene)
+	get_tree().get_root().remove_child(self)
+
+func _on_controls_pressed():
+	var scene = load("res://scenes/levels/Controls.tscn").instance()
+	get_tree().get_root().add_child(scene)
+	get_tree().get_root().remove_child(self)
 	
 func _on_exit_pressed():
 	get_tree().quit()
