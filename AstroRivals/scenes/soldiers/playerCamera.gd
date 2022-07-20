@@ -37,7 +37,7 @@ func _change_zoom(value: float):
 	)
 	tween.start()
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("zoom_in"):
 		# Inside a given class, we need to either write `self._zoom_level = ...` or explicitly
 		# call the setter function to use it.
