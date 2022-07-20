@@ -30,10 +30,10 @@ anchor_left = 0.793
 anchor_top = 0.892
 anchor_right = 0.793
 anchor_bottom = 0.892
-margin_left = -1152.56
-margin_top = -1085.36
-margin_right = -1102.56
-margin_bottom = -1066.36
+margin_left = -1155.56
+margin_top = -1089.36
+margin_right = -1105.56
+margin_bottom = -1070.36
 rect_scale = Vector2( 8, 8 )
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 0.427451, 0.2, 0.976471, 1 )
@@ -45,26 +45,27 @@ anchor_left = 0.79
 anchor_top = 0.894
 anchor_right = 0.79
 anchor_bottom = 0.894
-margin_left = -1911.8
-margin_top = -980.52
-margin_right = -1273.8
-margin_bottom = -691.52
+margin_left = -1919.8
+margin_top = -978.52
+margin_right = -1281.8
+margin_bottom = -660.52
 rect_scale = Vector2( 3, 3 )
 theme = ExtResource( 2 )
 tab_size = 3
-text = "															   Sprites					
-																								
+text = "															   Sprites	
 											Planet 						    Deep-Fold [Planet Generator]
 											Space 		 	 		      Deep-Fold [Space Background Generator]
 											Explosiones           	    Luis Zuno [@ansimuz]
 											Weapons 	  	   	       VladPenn y MattWalkden
 											Soldiers		  	          MattWalkden 
-
+																					
 																 Font 
 																
 													   Ateş Göral [@atesgora]
 													  Eric Araujo [@merwok_]
 													Vinícius Menézio [@vmenezio]
+
+												All sprites and fonts from itch.io
 
 															  ATwoGames
 															
