@@ -508,9 +508,4 @@ rotating = true
 zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 12 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-rotating = true
-zoom = Vector2( 0.5, 0.5 )
-script = ExtResource( 12 )
-
 [node name="Tween" type="Tween" parent="Camera2D"]
