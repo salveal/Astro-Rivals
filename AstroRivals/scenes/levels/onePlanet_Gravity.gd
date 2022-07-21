@@ -23,6 +23,7 @@ func _ready():
 	GUI_level.visible = false
 	change_gravity_level(actual_level_gravity)
 	connect("body_entered", self, "on_gravity_entered")
+	connect("body_exited", self, "on_gravity_exited")
 	
 func change_gravity_level(index: int):
 	gravity = list_gravity[index]
@@ -66,6 +67,12 @@ func on_gravity_entered(body: Node2D):
 		var new_rotation = body.get_rotation_player(gravity_vector)
 		body.speed = body.speed.rotated(-(new_rotation-last_rotation))
 		body.change_gravity_point(planet)
+	if body.has_method("set_gravity_center"):
+		body.set_gravity_center(planet.global_position)
+
+func on_gravity_exited(body: Node2D):
+	if body.has_method("set_gravity_center"):
+		body.set_gravity_center(null)
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

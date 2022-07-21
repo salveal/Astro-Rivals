@@ -4,14 +4,14 @@ extends RigidBody2D
 var grav_point = Vector2()
 var b_rotation = 0
 var damage_value
-onready var Planet = get_parent().get_node("listPlanets").get_node("Planet1")
+
+#onready var Planet = get_parent().get_node("listPlanets").get_node("Planet1")
 onready var sprite = $Sprite
 onready var soldierShot
 onready var camera = $Camera2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	grav_point = Planet.global_position
 	contact_monitor = true
 
 # Funcion para asociar el proyectil con el soldado que ejecuto el disparo
@@ -45,9 +45,13 @@ func deleteNode():
 	sendColisionToSoldier()
 	queue_free()
 
+func set_gravity_center(planet_pos):
+	camera.set_grav(planet_pos)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	var gravity_vector = (grav_point - position).normalized()
+	#var gravity_vector = (grav_point - position).normalized()
+	#print(grav_point)
 	var linear_vel = get_linear_velocity()
 	if linear_vel.length() > 20:
 		b_rotation = get_rotation_player(linear_vel.normalized())
