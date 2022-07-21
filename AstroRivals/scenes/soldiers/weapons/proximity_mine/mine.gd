@@ -69,3 +69,6 @@ func deleteNode():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	check_colision()
+
+func set_gravity_center(planet_pos):
+	camera.set_grav(planet_pos)

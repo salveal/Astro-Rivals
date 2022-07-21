@@ -30,6 +30,9 @@ func get_rotation_player(vel_vector):
 	var rotation = Vector2(1,0)
 	return rotation.angle_to(vel_vector)
 
+func set_gravity_center(planet_pos):
+	camera.set_grav(planet_pos)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	var gravity_vector = (grav_point - position).normalized()
