@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/soldiers/soldiers.gd" type="Script" id=1]
 [ext_resource path="res://assets/soldiers/red/Astronaut_Death_red.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/soldiers/red/Astronaut_Jump_red.png" type="Texture" id=5]
 [ext_resource path="res://assets/soldiers/red/Astronaut_Run_red.png" type="Texture" id=6]
 [ext_resource path="res://assets/font/font8bits.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/soldiers/playerCamera.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 8.25, 8.75 )
@@ -501,3 +502,10 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 7 )
 text = "XXX"
 align = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+rotating = true
+zoom = Vector2( 0.5, 0.5 )
+script = ExtResource( 12 )
+
+[node name="Tween" type="Tween" parent="Camera2D"]
