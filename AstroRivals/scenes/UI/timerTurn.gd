@@ -2,7 +2,7 @@ extends Timer
 
 # Variables
 var secondsTurn = 25
-var secondsStandby = 4
+var secondsStandby = 3
 var time_lapse
 var last_time
 var split_timer
@@ -19,8 +19,6 @@ func _ready():
 func initTimer(team: String):
 	# Inicia el timer dependiendo del estado del timer
 	# esto es si es el timer del turno de un equipo o el standby
-	
-
 	# Se cambia las variables que necesitamos dependiendo del estado de la variable team
 	if team == "red" or team == "blue":
 		wait_time = secondsTurn
@@ -31,6 +29,10 @@ func initTimer(team: String):
 	# reseteamos el timer
 	resetTimer()
 	
+func stopTimer():
+	stop()
+	print("stop timer")
+
 func resetTimer():
 	# resetea el timer cambiando el color del font e iniciandolo
 	# además de iniciar de nuevo el contador|

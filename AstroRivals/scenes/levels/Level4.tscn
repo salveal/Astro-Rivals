@@ -1,38 +1,75 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=1]
-[ext_resource path="res://assets/levels/planet4.png" type="Texture" id=2]
-[ext_resource path="res://assets/levels/background_level2.png" type="Texture" id=3]
-[ext_resource path="res://assets/levels/level1_planet.png" type="Texture" id=4]
-[ext_resource path="res://scenes/levels/codeLevels.gd" type="Script" id=5]
-[ext_resource path="res://scenes/UI/timerTurn.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/soldiers/blueSoldier.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/soldiers/redSoldier.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/levels/mapLimits.gd" type="Script" id=9]
-[ext_resource path="res://scenes/planets/particles_plante_285.tres" type="Material" id=10]
-[ext_resource path="res://scenes/levels/HUD.gd" type="Script" id=11]
-[ext_resource path="res://scenes/planets/particles_planet285_negative.tres" type="Material" id=12]
-[ext_resource path="res://assets/font/font_levels_gravity.tres" type="DynamicFont" id=13]
-[ext_resource path="res://assets/weapons/arrow.png" type="Texture" id=14]
-[ext_resource path="res://assets/font/monogram.ttf" type="DynamicFontData" id=15]
-[ext_resource path="res://scenes/UI/pause_menu.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/soldiers/blueSoldier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/UI/timerTurn.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/UI/pause_menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/soldiers/redSoldier.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/font/monogram.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/font/font_levels_gravity.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scenes/planets/particles_planet285_negative.tres" type="Material" id=7]
+[ext_resource path="res://scenes/planets/particles_plante_285.tres" type="Material" id=8]
+[ext_resource path="res://assets/weapons/arrow.png" type="Texture" id=9]
+[ext_resource path="res://scenes/levels/mapLimits.gd" type="Script" id=10]
+[ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=11]
+[ext_resource path="res://scenes/levels/HUD.gd" type="Script" id=12]
+[ext_resource path="res://assets/levels/planet7.png" type="Texture" id=13]
+[ext_resource path="res://assets/levels/background_level5.png" type="Texture" id=14]
+[ext_resource path="res://assets/levels/planet6.png" type="Texture" id=15]
+[ext_resource path="res://assets/levels/planet4.png" type="Texture" id=16]
+[ext_resource path="res://scenes/levels/codeLevels.gd" type="Script" id=17]
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=1]
 size = 50
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 15 )
+font_data = ExtResource( 5 )
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 285.028
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 200.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = -0.05
+orbit_velocity_random = 0.0
+angle = 90.0
+scale = 5.0
+scale_random = 1.0
+color = Color( 0.54902, 0.917647, 1, 1 )
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 120.0
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 200.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.05
+orbit_velocity_random = 0.0
+angle = 90.0
+scale = 5.0
+scale_random = 1.0
+color = Color( 0.54902, 0.917647, 1, 1 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=4]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 75.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 285.0
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 149.753
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 285.0
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 150.0
+
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 3.525, 562.125 )
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=11]
 emission_shape = 2
 emission_box_extents = Vector3( 5, 1, 1 )
 flag_disable_z = true
@@ -46,7 +83,7 @@ scale = 3.0
 scale_random = 1.0
 color = Color( 0.447059, 0.211765, 0.188235, 1 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=12]
 emission_shape = 2
 emission_box_extents = Vector3( 5, 1, 1 )
 flag_disable_z = true
@@ -60,10 +97,10 @@ scale = 3.0
 scale_random = 1.0
 color = Color( 0.447059, 0.211765, 0.188235, 1 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 198.45, 13.5 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=14]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 5, 1 )
 flag_disable_z = true
@@ -76,7 +113,7 @@ scale = 3.0
 scale_random = 1.0
 color = Color( 0.447059, 0.211765, 0.188235, 1 )
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=15]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 5, 1 )
 flag_disable_z = true
@@ -89,14 +126,14 @@ scale = 3.0
 scale_random = 1.0
 color = Color( 0.447059, 0.211765, 0.188235, 1 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 200.425, 11.5 )
 
-[node name="Level2" type="Node2D"]
-script = ExtResource( 5 )
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 17 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 
 [node name="HUDBlueTeam" type="ColorRect" parent="HUD"]
 visible = false
@@ -239,7 +276,7 @@ margin_right = 58.0
 margin_bottom = 24.0
 color = Color( 1, 1, 1, 0.392157 )
 
-[node name="TimerTurn" parent="HUD/HUDSimple" instance=ExtResource( 6 )]
+[node name="TimerTurn" parent="HUD/HUDSimple" instance=ExtResource( 2 )]
 
 [node name="TextureProgress" type="TextureProgress" parent="HUD/HUDSimple"]
 anchor_left = 0.148
@@ -289,7 +326,7 @@ color = Color( 1, 1, 1, 0.392157 )
 visible = false
 position = Vector2( 64, 25 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 14 )
+texture = ExtResource( 9 )
 
 [node name="ammo_weapon" type="Label" parent="HUD/HUDSimple/HUDSimple_left"]
 visible = false
@@ -297,39 +334,40 @@ margin_left = 60.0
 margin_top = 40.0
 margin_right = 122.0
 margin_bottom = 84.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 1 )
 text = "x99"
 align = 1
 
-[node name="menu_pause" parent="HUD" instance=ExtResource( 16 )]
+[node name="menu_pause" parent="HUD" instance=ExtResource( 3 )]
 visible = false
 
 [node name="Background" type="TextureRect" parent="."]
-margin_right = 2065.0
-margin_bottom = 1203.0
-stretch_mode = 2
+margin_left = 542.0
+margin_top = -285.0
+margin_right = 953.0
+margin_bottom = -56.0
 
 [node name="Sprite" type="Sprite" parent="Background"]
-position = Vector2( 984, 518 )
+position = Vector2( 417, 775 )
 scale = Vector2( 1.10547, 1.17083 )
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 
 [node name="listPlanets" type="Node" parent="."]
 
 [node name="Planet1" type="StaticBody2D" parent="listPlanets"]
-position = Vector2( 1400, 540 )
+position = Vector2( 945, 516 )
 collision_layer = 11
 collision_mask = 3
 
 [node name="ParticlesGravityNeg" type="Particles2D" parent="listPlanets/Planet1"]
 amount = 20
 lifetime = 100.0
-process_material = ExtResource( 12 )
+process_material = SubResource( 2 )
 
 [node name="ParticlesGravityPos" type="Particles2D" parent="listPlanets/Planet1"]
 amount = 20
 lifetime = 100.0
-process_material = ExtResource( 10 )
+process_material = SubResource( 3 )
 
 [node name="Gravity" type="Area2D" parent="listPlanets/Planet1"]
 collision_layer = 26
@@ -338,10 +376,10 @@ space_override = 3
 gravity_point = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 200.0
-script = ExtResource( 1 )
+script = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet1/Gravity"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="Label" type="Label" parent="listPlanets/Planet1/Gravity"]
 margin_left = -76.0
@@ -350,11 +388,11 @@ margin_right = 95.0
 margin_bottom = -288.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet1"]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="listPlanets/Planet1"]
-scale = Vector2( 0.82, 0.8 )
-texture = ExtResource( 2 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
 
 [node name="levelIndex" type="Label" parent="listPlanets/Planet1"]
 margin_left = -31.0
@@ -363,25 +401,25 @@ margin_right = 44.0
 margin_bottom = 231.0
 size_flags_horizontal = 5
 custom_colors/font_color = Color( 0.945098, 0, 1, 1 )
-custom_fonts/font = ExtResource( 13 )
+custom_fonts/font = ExtResource( 6 )
 text = "X
 "
 align = 1
 
 [node name="Planet2" type="StaticBody2D" parent="listPlanets"]
-position = Vector2( 520, 540 )
+position = Vector2( 1497, 300 )
 collision_layer = 11
 collision_mask = 3
 
 [node name="ParticlesGravityNeg" type="Particles2D" parent="listPlanets/Planet2"]
 amount = 20
 lifetime = 100.0
-process_material = ExtResource( 12 )
+process_material = ExtResource( 7 )
 
 [node name="ParticlesGravityPos" type="Particles2D" parent="listPlanets/Planet2"]
 amount = 20
 lifetime = 100.0
-process_material = ExtResource( 10 )
+process_material = ExtResource( 8 )
 
 [node name="Gravity" type="Area2D" parent="listPlanets/Planet2"]
 collision_layer = 26
@@ -390,10 +428,10 @@ space_override = 3
 gravity_point = true
 gravity_vec = Vector2( 0, 0 )
 gravity = 200.0
-script = ExtResource( 1 )
+script = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet2/Gravity"]
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="Label" type="Label" parent="listPlanets/Planet2/Gravity"]
 margin_left = -76.0
@@ -402,11 +440,10 @@ margin_right = 95.0
 margin_bottom = -288.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet2"]
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="listPlanets/Planet2"]
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 4 )
+texture = ExtResource( 15 )
 
 [node name="levelIndex" type="Label" parent="listPlanets/Planet2"]
 margin_left = -31.0
@@ -415,45 +452,96 @@ margin_right = 44.0
 margin_bottom = 231.0
 size_flags_horizontal = 5
 custom_colors/font_color = Color( 0.945098, 0, 1, 1 )
-custom_fonts/font = ExtResource( 13 )
+custom_fonts/font = ExtResource( 6 )
 text = "X
 "
 align = 1
 
+[node name="Planet3" type="StaticBody2D" parent="listPlanets"]
+position = Vector2( 394, 727 )
+collision_layer = 11
+collision_mask = 3
+
+[node name="ParticlesGravityNeg" type="Particles2D" parent="listPlanets/Planet3"]
+amount = 20
+lifetime = 100.0
+process_material = ExtResource( 7 )
+
+[node name="ParticlesGravityPos" type="Particles2D" parent="listPlanets/Planet3"]
+amount = 20
+lifetime = 100.0
+process_material = ExtResource( 8 )
+
+[node name="Gravity" type="Area2D" parent="listPlanets/Planet3"]
+collision_layer = 26
+collision_mask = 0
+space_override = 3
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 200.0
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet3/Gravity"]
+shape = SubResource( 8 )
+
+[node name="Label" type="Label" parent="listPlanets/Planet3/Gravity"]
+margin_right = 171.0
+margin_bottom = 33.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet3"]
+shape = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="listPlanets/Planet3"]
+texture = ExtResource( 16 )
+
+[node name="levelIndex" type="Label" parent="listPlanets/Planet3"]
+margin_left = -30.0
+margin_top = -93.0
+margin_right = 45.0
+margin_bottom = 228.0
+size_flags_horizontal = 5
+custom_colors/font_color = Color( 0.945098, 0, 1, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "X
+"
+align = 1
+
+[node name="listSpace" type="Node" parent="."]
+
 [node name="queueBlue" type="Node" parent="."]
 
-[node name="Blue1" parent="queueBlue" instance=ExtResource( 7 )]
-position = Vector2( 524, 357 )
+[node name="Blue1" parent="queueBlue" instance=ExtResource( 1 )]
+position = Vector2( 1507, 81 )
 
-[node name="Blue2" parent="queueBlue" instance=ExtResource( 7 )]
-position = Vector2( 708, 534 )
+[node name="Blue2" parent="queueBlue" instance=ExtResource( 1 )]
+position = Vector2( 1280, 286 )
 
-[node name="Blue3" parent="queueBlue" instance=ExtResource( 7 )]
-position = Vector2( 332, 528 )
+[node name="Blue3" parent="queueBlue" instance=ExtResource( 1 )]
+position = Vector2( 1495, 516 )
 
-[node name="Blue4" parent="queueBlue" instance=ExtResource( 7 )]
-position = Vector2( 526, 727 )
+[node name="Blue4" parent="queueBlue" instance=ExtResource( 1 )]
+position = Vector2( 1050, 439 )
 
 [node name="queueRed" type="Node" parent="."]
 
-[node name="Red1" parent="queueRed" instance=ExtResource( 8 )]
-position = Vector2( 1396, 349 )
+[node name="Red1" parent="queueRed" instance=ExtResource( 4 )]
+position = Vector2( 388, 532 )
 
-[node name="Red2" parent="queueRed" instance=ExtResource( 8 )]
-position = Vector2( 1187, 529 )
+[node name="Red2" parent="queueRed" instance=ExtResource( 4 )]
+position = Vector2( 585, 704 )
 
-[node name="Red3" parent="queueRed" instance=ExtResource( 8 )]
-position = Vector2( 1613, 543 )
+[node name="Red3" parent="queueRed" instance=ExtResource( 4 )]
+position = Vector2( 801, 574 )
 
-[node name="Red4" parent="queueRed" instance=ExtResource( 8 )]
-position = Vector2( 1416, 734 )
+[node name="Red4" parent="queueRed" instance=ExtResource( 4 )]
+position = Vector2( 408, 917 )
 
 [node name="queuePlusCrystal" type="Node" parent="."]
 
 [node name="queueMinusCrystal" type="Node" parent="."]
 
 [node name="mapLimits" type="Node" parent="."]
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="left" type="Area2D" parent="mapLimits"]
 scale = Vector2( 5, 1 )
@@ -462,19 +550,19 @@ collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/left"]
 position = Vector2( -4.75, 555.5 )
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 
 [node name="meteorParticleDown" type="Particles2D" parent="mapLimits/left"]
 position = Vector2( -5, 1 )
 amount = 20
 lifetime = 10.0
-process_material = SubResource( 8 )
+process_material = SubResource( 11 )
 
 [node name="meteorParticleUp" type="Particles2D" parent="mapLimits/left"]
 position = Vector2( -4.2, 1098 )
 amount = 20
 lifetime = 10.0
-process_material = SubResource( 9 )
+process_material = SubResource( 12 )
 
 [node name="bottom" type="Area2D" parent="mapLimits"]
 position = Vector2( 538, 981 )
@@ -484,19 +572,19 @@ collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/bottom"]
 position = Vector2( 88.15, 121 )
-shape = SubResource( 10 )
+shape = SubResource( 13 )
 
 [node name="meteorParticlesLeft" type="Particles2D" parent="mapLimits/bottom"]
 position = Vector2( -110.4, 120 )
 amount = 20
 lifetime = 10.0
-process_material = SubResource( 11 )
+process_material = SubResource( 14 )
 
 [node name="meteorParticlesRight" type="Particles2D" parent="mapLimits/bottom"]
 position = Vector2( 282, 114 )
 amount = 20
 lifetime = 10.0
-process_material = SubResource( 12 )
+process_material = SubResource( 15 )
 
 [node name="upper" type="Area2D" parent="mapLimits"]
 position = Vector2( 529, -301 )
@@ -506,19 +594,19 @@ collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/upper"]
 position = Vector2( 85.575, 282 )
-shape = SubResource( 13 )
+shape = SubResource( 16 )
 
 [node name="meteorParticlesLeft" type="Particles2D" parent="mapLimits/upper"]
 position = Vector2( -113.8, 287 )
 amount = 20
 lifetime = 10.0
-process_material = SubResource( 11 )
+process_material = SubResource( 14 )
 
 [node name="meteorParticlesRight" type="Particles2D" parent="mapLimits/upper"]
 position = Vector2( 286, 281 )
 amount = 20
 lifetime = 10.0
-process_material = SubResource( 12 )
+process_material = SubResource( 15 )
 
 [node name="rigth" type="Area2D" parent="mapLimits"]
 position = Vector2( 1048, 2 )
@@ -528,20 +616,20 @@ collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/rigth"]
 position = Vector2( 179.875, 523.875 )
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 
 [node name="meteorParticleDown" type="Particles2D" parent="mapLimits/rigth"]
-position = Vector2( 180.2, -30 )
+position = Vector2( 180.2, -20 )
 amount = 20
 lifetime = 10.0
-process_material = SubResource( 8 )
+process_material = SubResource( 11 )
 
 [node name="meteorParticleUp" type="Particles2D" parent="mapLimits/rigth"]
 position = Vector2( 175.675, 1621.88 )
 amount = 20
 lifetime = 10.0
-process_material = SubResource( 9 )
+process_material = SubResource( 12 )
 
 [node name="Camera" type="Camera2D" parent="."]
+visible = false
 anchor_mode = 0
-current = true

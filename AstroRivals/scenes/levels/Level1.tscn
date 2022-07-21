@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/levels/codeLevels.gd" type="Script" id=1]
-[ext_resource path="res://assets/levels/level2_background.png" type="Texture" id=2]
+[ext_resource path="res://assets/levels/background_level1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=3]
 [ext_resource path="res://assets/levels/planet3.png" type="Texture" id=4]
 [ext_resource path="res://scenes/UI/timerTurn.tscn" type="PackedScene" id=5]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/font/font_levels_gravity.tres" type="DynamicFont" id=11]
 [ext_resource path="res://assets/weapons/arrow.png" type="Texture" id=12]
 [ext_resource path="res://assets/font/monogram.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://scenes/UI/pause_menu.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=8]
 size = 50
@@ -40,14 +41,68 @@ radius = 501.025
 [sub_resource type="CircleShape2D" id=2]
 radius = 225.009
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 3.4, 552.375 )
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 3.525, 562.125 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 193.8, 10 )
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+gravity = Vector3( 0, 25, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.447059, 0.211765, 0.188235, 1 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 193.2, 11.5 )
+[sub_resource type="ParticlesMaterial" id=11]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, -25, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.447059, 0.211765, 0.188235, 1 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 198.45, 13.5 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 5, 1 )
+flag_disable_z = true
+gravity = Vector3( 25, 0, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.447059, 0.211765, 0.188235, 1 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 5, 1 )
+flag_disable_z = true
+gravity = Vector3( -25, 0, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.447059, 0.211765, 0.188235, 1 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 200.425, 11.5 )
 
 [node name="Level1" type="Node2D"]
 light_mask = 0
@@ -259,6 +314,9 @@ custom_fonts/font = SubResource( 8 )
 text = "x99"
 align = 1
 
+[node name="menu_pause" parent="HUD" instance=ExtResource( 14 )]
+visible = false
+
 [node name="Background" type="TextureRect" parent="."]
 margin_left = -176.0
 margin_top = 17.0
@@ -348,6 +406,10 @@ position = Vector2( 1077, 157 )
 [node name="Red4" parent="queueRed" instance=ExtResource( 7 )]
 position = Vector2( 815, 960 )
 
+[node name="queuePlusCrystal" type="Node" parent="."]
+
+[node name="queueMinusCrystal" type="Node" parent="."]
+
 [node name="mapLimits" type="Node" parent="."]
 script = ExtResource( 8 )
 
@@ -357,17 +419,42 @@ collision_layer = 28
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/left"]
-position = Vector2( -5.2, 535.25 )
-shape = SubResource( 4 )
+position = Vector2( -4.75, 555.5 )
+shape = SubResource( 9 )
+
+[node name="meteorParticleDown" type="Particles2D" parent="mapLimits/left"]
+position = Vector2( -5, 1 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 10 )
+
+[node name="meteorParticleUp" type="Particles2D" parent="mapLimits/left"]
+position = Vector2( -4.2, 1098 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 11 )
 
 [node name="bottom" type="Area2D" parent="mapLimits"]
+position = Vector2( 538, 981 )
 scale = Vector2( 5, 1 )
 collision_layer = 28
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/bottom"]
-position = Vector2( 191, 1099 )
-shape = SubResource( 6 )
+position = Vector2( 88.15, 121 )
+shape = SubResource( 12 )
+
+[node name="meteorParticlesLeft" type="Particles2D" parent="mapLimits/bottom"]
+position = Vector2( -110.4, 120 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 13 )
+
+[node name="meteorParticlesRight" type="Particles2D" parent="mapLimits/bottom"]
+position = Vector2( 282, 114 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 14 )
 
 [node name="upper" type="Area2D" parent="mapLimits"]
 position = Vector2( 529, -301 )
@@ -376,8 +463,20 @@ collision_layer = 28
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/upper"]
-position = Vector2( 86.2, 281.5 )
-shape = SubResource( 5 )
+position = Vector2( 85.575, 282 )
+shape = SubResource( 15 )
+
+[node name="meteorParticlesLeft" type="Particles2D" parent="mapLimits/upper"]
+position = Vector2( -113.8, 287 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 13 )
+
+[node name="meteorParticlesRight" type="Particles2D" parent="mapLimits/upper"]
+position = Vector2( 286, 281 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 14 )
 
 [node name="rigth" type="Area2D" parent="mapLimits"]
 position = Vector2( 1048, 2 )
@@ -386,8 +485,20 @@ collision_layer = 28
 collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/rigth"]
-position = Vector2( 178.8, 535.625 )
-shape = SubResource( 4 )
+position = Vector2( 179.875, 523.875 )
+shape = SubResource( 9 )
+
+[node name="meteorParticleDown" type="Particles2D" parent="mapLimits/rigth"]
+position = Vector2( 179.4, -21 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 10 )
+
+[node name="meteorParticleUp" type="Particles2D" parent="mapLimits/rigth"]
+position = Vector2( 175.675, 1621.88 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 11 )
 
 [node name="Camera" type="Camera2D" parent="."]
 anchor_mode = 0

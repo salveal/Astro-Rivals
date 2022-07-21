@@ -1,0 +1,763 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://scenes/soldiers/blueSoldier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/UI/pause_menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/soldiers/redSoldier.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/UI/timerTurn.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/planets/particles_plante_285.tres" type="Material" id=5]
+[ext_resource path="res://scenes/planets/particles_planet285_negative.tres" type="Material" id=6]
+[ext_resource path="res://scenes/levels/onePlanet_Gravity.gd" type="Script" id=7]
+[ext_resource path="res://scenes/levels/codeLevels.gd" type="Script" id=8]
+[ext_resource path="res://assets/font/monogram.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://assets/font/font_levels_gravity.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/levels/planet4.png" type="Texture" id=11]
+[ext_resource path="res://assets/levels/planet3.png" type="Texture" id=12]
+[ext_resource path="res://scenes/levels/mapLimits.gd" type="Script" id=13]
+[ext_resource path="res://scenes/levels/HUD.gd" type="Script" id=14]
+[ext_resource path="res://assets/weapons/arrow.png" type="Texture" id=15]
+[ext_resource path="res://assets/levels/planet5.png" type="Texture" id=16]
+[ext_resource path="res://assets/levels/background_level4.png" type="Texture" id=17]
+[ext_resource path="res://assets/levels/star_spritesheet.png" type="Texture" id=18]
+[ext_resource path="res://scenes/levels/star.gd" type="Script" id=19]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 200.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = -0.05
+orbit_velocity_random = 0.0
+angle = 90.0
+scale = 5.0
+scale_random = 1.0
+color = Color( 0.54902, 0.917647, 1, 1 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 1
+emission_sphere_radius = 200.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.05
+orbit_velocity_random = 0.0
+angle = 90.0
+scale = 5.0
+scale_random = 1.0
+color = Color( 0.54902, 0.917647, 1, 1 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 75.0
+
+[sub_resource type="CircleShape2D" id=12]
+radius = 285.0
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 149.753
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 285.0
+
+[sub_resource type="CircleShape2D" id=15]
+radius = 150.0
+
+[sub_resource type="Animation" id=7]
+length = 32.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 18 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 81 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, 10, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 11, 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, 11.8, 11.9, 12, 12.1, 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8, 12.9, 13, 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 13.7, 13.8, 13.9, 14, 14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9, 15, 15.1, 15.2, 15.3, 15.4, 15.5, 15.6, 15.7, 15.8, 15.9, 16, 16.1, 16.2, 16.3, 16.4, 16.5, 16.6, 16.7, 16.8, 16.9, 17, 17.1, 17.2, 17.3, 17.4, 17.5, 17.6, 17.7, 17.8, 17.9, 18, 18.1, 18.2, 18.3, 18.4, 18.5, 18.6, 18.7, 18.8, 18.9, 19, 19.1, 19.2, 19.3, 19.4, 19.5, 19.6, 19.7, 19.8, 19.9, 20, 20.1, 20.2, 20.3, 20.4, 20.5, 20.6, 20.7, 20.8, 20.9, 21, 21.1, 21.2, 21.3, 21.4, 21.5, 21.6, 21.7, 21.8, 21.9, 22, 22.1, 22.2, 22.3, 22.4, 22.5, 22.6, 22.7, 22.8, 22.9, 23, 23.1, 23.2, 23.3, 23.4, 23.5, 23.6, 23.7, 23.8, 23.9, 24, 24.1, 24.2, 24.3, 24.4, 24.5, 24.6, 24.7, 24.8, 24.9, 25, 25.1, 25.2, 25.3, 25.4, 25.5, 25.6, 25.7, 25.8, 25.9, 26, 26.1, 26.2, 26.3, 26.4, 26.5, 26.6, 26.7, 26.8, 26.9, 27, 27.1, 27.2, 27.3, 27.4, 27.5, 27.6, 27.7, 27.8, 27.9, 28, 28.1, 28.2, 28.3, 28.4, 28.5, 28.6, 28.7, 28.8, 28.9, 29, 29.1, 29.2, 29.3, 29.4, 29.5, 29.6, 29.7, 29.8, 29.9, 30, 30.1, 30.2, 30.3, 30.4, 30.5, 30.6, 30.7, 30.8, 30.9, 31, 31.1, 31.2, 31.3, 31.4, 31.5, 31.6, 31.7, 31.8, 31.9, 32, 32.1, 32.2, 32.3, 32.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 323 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "idle"
+length = 32.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 18 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 81 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, 10, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 11, 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, 11.8, 11.9, 12, 12.1, 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8, 12.9, 13, 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 13.7, 13.8, 13.9, 14, 14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9, 15, 15.1, 15.2, 15.3, 15.4, 15.5, 15.6, 15.7, 15.8, 15.9, 16, 16.1, 16.2, 16.3, 16.4, 16.5, 16.6, 16.7, 16.8, 16.9, 17, 17.1, 17.2, 17.3, 17.4, 17.5, 17.6, 17.7, 17.8, 17.9, 18, 18.1, 18.2, 18.3, 18.4, 18.5, 18.6, 18.7, 18.8, 18.9, 19, 19.1, 19.2, 19.3, 19.4, 19.5, 19.6, 19.7, 19.8, 19.9, 20, 20.1, 20.2, 20.3, 20.4, 20.5, 20.6, 20.7, 20.8, 20.9, 21, 21.1, 21.2, 21.3, 21.4, 21.5, 21.6, 21.7, 21.8, 21.9, 22, 22.1, 22.2, 22.3, 22.4, 22.5, 22.6, 22.7, 22.8, 22.9, 23, 23.1, 23.2, 23.3, 23.4, 23.5, 23.6, 23.7, 23.8, 23.9, 24, 24.1, 24.2, 24.3, 24.4, 24.5, 24.6, 24.7, 24.8, 24.9, 25, 25.1, 25.2, 25.3, 25.4, 25.5, 25.6, 25.7, 25.8, 25.9, 26, 26.1, 26.2, 26.3, 26.4, 26.5, 26.6, 26.7, 26.8, 26.9, 27, 27.1, 27.2, 27.3, 27.4, 27.5, 27.6, 27.7, 27.8, 27.9, 28, 28.1, 28.2, 28.3, 28.4, 28.5, 28.6, 28.7, 28.8, 28.9, 29, 29.1, 29.2, 29.3, 29.4, 29.5, 29.6, 29.7, 29.8, 29.9, 30, 30.1, 30.2, 30.3, 30.4, 30.5, 30.6, 30.7, 30.8, 30.9, 31, 31.1, 31.2, 31.3, 31.4, 31.5, 31.6, 31.7, 31.8, 31.9, 32, 32.1, 32.2, 32.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 246, 245, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323 ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 125.004
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 3.525, 562.125 )
+
+[sub_resource type="ParticlesMaterial" id=17]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+gravity = Vector3( 0, 25, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.447059, 0.211765, 0.188235, 1 )
+
+[sub_resource type="ParticlesMaterial" id=18]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, -25, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.447059, 0.211765, 0.188235, 1 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 198.45, 13.5 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 5, 1 )
+flag_disable_z = true
+gravity = Vector3( 25, 0, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.447059, 0.211765, 0.188235, 1 )
+
+[sub_resource type="ParticlesMaterial" id=21]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 5, 1 )
+flag_disable_z = true
+gravity = Vector3( -25, 0, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color = Color( 0.447059, 0.211765, 0.188235, 1 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 200.425, 11.5 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 14 )
+
+[node name="HUDBlueTeam" type="ColorRect" parent="HUD"]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -200.0
+margin_right = 115.0
+margin_bottom = -108.0
+rect_scale = Vector2( 2, 2 )
+color = Color( 0, 0, 1, 0.588235 )
+
+[node name="HPbarA" type="ProgressBar" parent="HUD/HUDBlueTeam"]
+margin_left = 38.5
+margin_top = 3.0
+margin_right = 112.5
+margin_bottom = 17.0
+
+[node name="HPbarB" type="ProgressBar" parent="HUD/HUDBlueTeam"]
+margin_left = 37.5
+margin_top = 26.0
+margin_right = 112.5
+margin_bottom = 40.0
+
+[node name="HPbarC" type="ProgressBar" parent="HUD/HUDBlueTeam"]
+margin_left = 37.5
+margin_top = 50.0
+margin_right = 112.5
+margin_bottom = 64.0
+
+[node name="HPbarD" type="ProgressBar" parent="HUD/HUDBlueTeam"]
+margin_left = 37.5
+margin_top = 74.0
+margin_right = 112.5
+margin_bottom = 88.0
+
+[node name="SoldadoA" type="Label" parent="HUD/HUDBlueTeam"]
+margin_left = 12.0
+margin_top = 3.5
+margin_right = 25.0
+margin_bottom = 17.5
+text = "A"
+
+[node name="SoldadoB" type="Label" parent="HUD/HUDBlueTeam"]
+margin_left = 12.0
+margin_top = 26.0
+margin_right = 25.0
+margin_bottom = 40.0
+text = "B"
+
+[node name="SoldadoC" type="Label" parent="HUD/HUDBlueTeam"]
+margin_left = 12.0
+margin_top = 51.0
+margin_right = 25.0
+margin_bottom = 65.0
+text = "C"
+
+[node name="SoldadoD" type="Label" parent="HUD/HUDBlueTeam"]
+margin_left = 12.0
+margin_top = 74.0
+margin_right = 25.0
+margin_bottom = 88.0
+text = "D"
+
+[node name="HUDRedTeam" type="ColorRect" parent="HUD"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -230.0
+margin_top = -200.0
+margin_right = -115.0
+margin_bottom = -108.0
+rect_scale = Vector2( 2, 2 )
+color = Color( 1, 0, 0, 0.588235 )
+
+[node name="HPbar1" type="ProgressBar" parent="HUD/HUDRedTeam"]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 78.0
+margin_bottom = 17.0
+
+[node name="HPbar2" type="ProgressBar" parent="HUD/HUDRedTeam"]
+margin_left = 3.0
+margin_top = 26.0
+margin_right = 78.0
+margin_bottom = 40.0
+rounded = true
+
+[node name="HPbar3" type="ProgressBar" parent="HUD/HUDRedTeam"]
+margin_left = 3.0
+margin_top = 51.0
+margin_right = 78.0
+margin_bottom = 65.0
+rounded = true
+
+[node name="HPbar4" type="ProgressBar" parent="HUD/HUDRedTeam"]
+margin_left = 3.0
+margin_top = 75.0
+margin_right = 78.0
+margin_bottom = 89.0
+rounded = true
+
+[node name="SoldadoA" type="Label" parent="HUD/HUDRedTeam"]
+margin_left = 92.0
+margin_top = 5.0
+margin_right = 105.0
+margin_bottom = 19.0
+text = "A"
+
+[node name="SoldadoB" type="Label" parent="HUD/HUDRedTeam"]
+margin_left = 92.0
+margin_top = 27.5
+margin_right = 105.0
+margin_bottom = 41.5
+text = "B"
+
+[node name="SoldadoC" type="Label" parent="HUD/HUDRedTeam"]
+margin_left = 92.0
+margin_top = 52.0
+margin_right = 105.0
+margin_bottom = 66.0
+text = "C"
+
+[node name="SoldadoD" type="Label" parent="HUD/HUDRedTeam"]
+margin_left = 92.0
+margin_top = 75.5
+margin_right = 105.0
+margin_bottom = 89.5
+text = "D"
+
+[node name="HUDSimple" type="ColorRect" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -81.0
+margin_right = 58.0
+margin_bottom = 24.0
+color = Color( 1, 1, 1, 0.392157 )
+
+[node name="TimerTurn" parent="HUD/HUDSimple" instance=ExtResource( 4 )]
+
+[node name="TextureProgress" type="TextureProgress" parent="HUD/HUDSimple"]
+anchor_left = 0.148
+anchor_top = -0.162
+anchor_right = 0.148
+anchor_bottom = -0.162
+margin_left = 8.944
+margin_top = -35.99
+margin_right = 62.944
+margin_bottom = 9.01
+value = 45.0
+fill_mode = 4
+
+[node name="HUDSimple_rigth" type="ColorRect" parent="HUD/HUDSimple"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 139.0
+margin_top = -105.0
+margin_right = 261.0
+color = Color( 1, 1, 1, 0.392157 )
+
+[node name="TextureProgress" type="TextureProgress" parent="HUD/HUDSimple/HUDSimple_rigth"]
+anchor_left = 0.148
+anchor_top = -0.162
+anchor_right = 0.148
+anchor_bottom = -0.162
+margin_left = 14.944
+margin_top = 21.01
+margin_right = 68.944
+margin_bottom = 96.01
+value = 45.0
+fill_mode = 4
+
+[node name="HUDSimple_left" type="ColorRect" parent="HUD/HUDSimple"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -261.0
+margin_top = -105.0
+margin_right = -139.0
+color = Color( 1, 1, 1, 0.392157 )
+
+[node name="symbol_weapon" type="Sprite" parent="HUD/HUDSimple/HUDSimple_left"]
+visible = false
+position = Vector2( 64, 25 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 15 )
+
+[node name="ammo_weapon" type="Label" parent="HUD/HUDSimple/HUDSimple_left"]
+visible = false
+margin_left = 60.0
+margin_top = 40.0
+margin_right = 122.0
+margin_bottom = 84.0
+custom_fonts/font = SubResource( 1 )
+text = "x99"
+align = 1
+
+[node name="menu_pause" parent="HUD" instance=ExtResource( 2 )]
+visible = false
+
+[node name="Background" type="TextureRect" parent="."]
+margin_left = 542.0
+margin_top = -285.0
+margin_right = 953.0
+margin_bottom = -56.0
+
+[node name="Sprite" type="Sprite" parent="Background"]
+position = Vector2( 417, 775 )
+scale = Vector2( 1.10547, 1.17083 )
+texture = ExtResource( 17 )
+
+[node name="listPlanets" type="Node" parent="."]
+
+[node name="Planet1" type="StaticBody2D" parent="listPlanets"]
+position = Vector2( 800, 800 )
+collision_layer = 11
+collision_mask = 3
+
+[node name="ParticlesGravityNeg" type="Particles2D" parent="listPlanets/Planet1"]
+amount = 20
+lifetime = 100.0
+process_material = SubResource( 9 )
+
+[node name="ParticlesGravityPos" type="Particles2D" parent="listPlanets/Planet1"]
+amount = 20
+lifetime = 100.0
+process_material = SubResource( 10 )
+
+[node name="Gravity" type="Area2D" parent="listPlanets/Planet1"]
+collision_layer = 26
+collision_mask = 2
+space_override = 3
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 200.0
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet1/Gravity"]
+shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="listPlanets/Planet1/Gravity"]
+margin_left = -76.0
+margin_top = -321.0
+margin_right = 95.0
+margin_bottom = -288.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet1"]
+shape = SubResource( 11 )
+
+[node name="Sprite" type="Sprite" parent="listPlanets/Planet1"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="levelIndex" type="Label" parent="listPlanets/Planet1"]
+margin_left = -31.0
+margin_top = -90.0
+margin_right = 44.0
+margin_bottom = 231.0
+size_flags_horizontal = 5
+custom_colors/font_color = Color( 0.945098, 0, 1, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "X
+"
+align = 1
+
+[node name="Planet2" type="StaticBody2D" parent="listPlanets"]
+position = Vector2( 1550, 511 )
+collision_layer = 11
+collision_mask = 3
+
+[node name="ParticlesGravityNeg" type="Particles2D" parent="listPlanets/Planet2"]
+amount = 20
+lifetime = 100.0
+process_material = ExtResource( 6 )
+
+[node name="ParticlesGravityPos" type="Particles2D" parent="listPlanets/Planet2"]
+amount = 20
+lifetime = 100.0
+process_material = ExtResource( 5 )
+
+[node name="Gravity" type="Area2D" parent="listPlanets/Planet2"]
+collision_layer = 26
+collision_mask = 0
+space_override = 3
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 200.0
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet2/Gravity"]
+shape = SubResource( 12 )
+
+[node name="Label" type="Label" parent="listPlanets/Planet2/Gravity"]
+margin_left = -76.0
+margin_top = -321.0
+margin_right = 95.0
+margin_bottom = -288.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet2"]
+shape = SubResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="listPlanets/Planet2"]
+texture = ExtResource( 12 )
+
+[node name="levelIndex" type="Label" parent="listPlanets/Planet2"]
+margin_left = -31.0
+margin_top = -90.0
+margin_right = 44.0
+margin_bottom = 231.0
+size_flags_horizontal = 5
+custom_colors/font_color = Color( 0.945098, 0, 1, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "X
+"
+align = 1
+
+[node name="Planet3" type="StaticBody2D" parent="listPlanets"]
+position = Vector2( 399, 313 )
+collision_layer = 11
+collision_mask = 3
+
+[node name="ParticlesGravityNeg" type="Particles2D" parent="listPlanets/Planet3"]
+amount = 20
+lifetime = 100.0
+process_material = ExtResource( 6 )
+
+[node name="ParticlesGravityPos" type="Particles2D" parent="listPlanets/Planet3"]
+amount = 20
+lifetime = 100.0
+process_material = ExtResource( 5 )
+
+[node name="Gravity" type="Area2D" parent="listPlanets/Planet3"]
+collision_layer = 26
+collision_mask = 0
+space_override = 3
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
+gravity = 200.0
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet3/Gravity"]
+shape = SubResource( 14 )
+
+[node name="Label" type="Label" parent="listPlanets/Planet3/Gravity"]
+margin_right = 171.0
+margin_bottom = 33.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listPlanets/Planet3"]
+shape = SubResource( 15 )
+
+[node name="Sprite" type="Sprite" parent="listPlanets/Planet3"]
+texture = ExtResource( 16 )
+
+[node name="levelIndex" type="Label" parent="listPlanets/Planet3"]
+margin_left = -30.0
+margin_top = -93.0
+margin_right = 45.0
+margin_bottom = 228.0
+size_flags_horizontal = 5
+custom_colors/font_color = Color( 0.945098, 0, 1, 1 )
+custom_fonts/font = ExtResource( 10 )
+text = "X
+"
+align = 1
+
+[node name="listSpace" type="Node" parent="."]
+
+[node name="Sun" type="Area2D" parent="listSpace"]
+position = Vector2( 1024, 256 )
+script = ExtResource( 19 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="listSpace/Sun"]
+root_node = NodePath("../Sprite")
+autoplay = "idle"
+anims/RESET = SubResource( 7 )
+anims/idle = SubResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="listSpace/Sun"]
+scale = Vector2( 2.4, 2.4 )
+texture = ExtResource( 18 )
+hframes = 81
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="listSpace/Sun"]
+position = Vector2( 4, 3 )
+shape = SubResource( 3 )
+
+[node name="queueBlue" type="Node" parent="."]
+
+[node name="Blue1" parent="queueBlue" instance=ExtResource( 1 )]
+position = Vector2( 416, 96 )
+
+[node name="Blue2" parent="queueBlue" instance=ExtResource( 1 )]
+position = Vector2( 600, 273 )
+
+[node name="Blue3" parent="queueBlue" instance=ExtResource( 1 )]
+position = Vector2( 404, 531 )
+
+[node name="Blue4" parent="queueBlue" instance=ExtResource( 1 )]
+position = Vector2( 699, 699 )
+
+[node name="queueRed" type="Node" parent="."]
+
+[node name="Red1" parent="queueRed" instance=ExtResource( 3 )]
+position = Vector2( 1554, 318 )
+
+[node name="Red2" parent="queueRed" instance=ExtResource( 3 )]
+position = Vector2( 1345, 498 )
+
+[node name="Red3" parent="queueRed" instance=ExtResource( 3 )]
+position = Vector2( 881, 900 )
+
+[node name="Red4" parent="queueRed" instance=ExtResource( 3 )]
+position = Vector2( 1574, 703 )
+
+[node name="queuePlusCrystal" type="Node" parent="."]
+
+[node name="queueMinusCrystal" type="Node" parent="."]
+
+[node name="mapLimits" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="left" type="Area2D" parent="mapLimits"]
+scale = Vector2( 5, 1 )
+collision_layer = 28
+collision_mask = 28
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/left"]
+position = Vector2( -4.75, 555.5 )
+shape = SubResource( 16 )
+
+[node name="meteorParticleDown" type="Particles2D" parent="mapLimits/left"]
+position = Vector2( -5, 1 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 17 )
+
+[node name="meteorParticleUp" type="Particles2D" parent="mapLimits/left"]
+position = Vector2( -4.2, 1098 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 18 )
+
+[node name="bottom" type="Area2D" parent="mapLimits"]
+position = Vector2( 538, 981 )
+scale = Vector2( 5, 1 )
+collision_layer = 28
+collision_mask = 28
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/bottom"]
+position = Vector2( 88.15, 121 )
+shape = SubResource( 19 )
+
+[node name="meteorParticlesLeft" type="Particles2D" parent="mapLimits/bottom"]
+position = Vector2( -110.4, 120 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 20 )
+
+[node name="meteorParticlesRight" type="Particles2D" parent="mapLimits/bottom"]
+position = Vector2( 282, 114 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 21 )
+
+[node name="upper" type="Area2D" parent="mapLimits"]
+position = Vector2( 529, -301 )
+scale = Vector2( 5, 1 )
+collision_layer = 28
+collision_mask = 28
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/upper"]
+position = Vector2( 85.575, 282 )
+shape = SubResource( 22 )
+
+[node name="meteorParticlesLeft" type="Particles2D" parent="mapLimits/upper"]
+position = Vector2( -113.8, 287 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 20 )
+
+[node name="meteorParticlesRight" type="Particles2D" parent="mapLimits/upper"]
+position = Vector2( 286, 281 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 21 )
+
+[node name="rigth" type="Area2D" parent="mapLimits"]
+position = Vector2( 1048, 2 )
+scale = Vector2( 5, 1 )
+collision_layer = 28
+collision_mask = 28
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mapLimits/rigth"]
+position = Vector2( 179.875, 523.875 )
+shape = SubResource( 16 )
+
+[node name="meteorParticleDown" type="Particles2D" parent="mapLimits/rigth"]
+position = Vector2( 180.2, -25 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 17 )
+
+[node name="meteorParticleUp" type="Particles2D" parent="mapLimits/rigth"]
+position = Vector2( 175.675, 1621.88 )
+amount = 20
+lifetime = 10.0
+process_material = SubResource( 18 )
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
