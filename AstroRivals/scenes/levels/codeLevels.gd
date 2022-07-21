@@ -225,6 +225,7 @@ func changeTurn():
 	actualPlayer.active = true
 	actualPlayer.camera.reset_camera()
 	actualPlayer.camera.current = true
+	actualPlayer.changeControl = false
 	actualPlayer.emit_signal("edit_hud_ammo", actualPlayer.actual_weapon_symbol, str(actualPlayer.ammo_weapons[actualPlayer.actual_weapon]))
 	
 	# Se corre el codigo de spawnear items
